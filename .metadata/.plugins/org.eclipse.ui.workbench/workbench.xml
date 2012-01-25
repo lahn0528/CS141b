@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="40" version="2.0">
+<workbench progressCount="39" version="2.0">
 <workbenchAdvisor/>
-<window height="813" width="1260" x="107" y="52">
+<window height="780" width="1260" x="98" y="52">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
 </perspectiveBar>
-<coolbarLayout locked="0">
+<coolbarLayout>
 <coolItem id="group.file" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="106" y="22"/>
-<coolItem id="com.google.gdt.eclipse.suite.GDTPulldownToolbar" itemType="typeToolBarContribution" x="40" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.file" itemType="typeToolBarContribution" x="156" y="22"/>
+<coolItem id="com.google.gdt.eclipse.suite.GDTPulldownToolbar" itemType="typeToolBarContribution" x="51" y="22"/>
 <coolItem id="additions" itemType="typeGroupMarker"/>
 <coolItem id="adt.actionSet.avdManager" itemType="typeToolBarContribution" x="32" y="22"/>
 <coolItem id="adt.actionSet.wizards" itemType="typeToolBarContribution" x="76" y="22"/>
-<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="100" y="22"/>
-<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="62" y="22"/>
-<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="84" y="22"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="120" y="22"/>
+<coolItem id="org.eclipse.debug.ui.launchActionSet" itemType="typeToolBarContribution" x="123" y="22"/>
+<coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="74" y="22"/>
+<coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="97" y="22"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="130" y="22"/>
 <coolItem id="org.eclipse.wst.xml.ui.perspective.NewFileToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="org.eclipse.wst.xml.ui.design.DesignToolBar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
-<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="152" y="22"/>
+<coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="182" y="22"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
+<coolItem id="com.google.gwt.eclipse.core.editors.gwtJavaEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -33,18 +34,13 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
-<part id="1"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Client.java" partName="Client.java" path="/Users/belovedjudymou/Documents/Git/CS141b/FileShare/src/Client.java" title="Client.java" tooltip="FileShare/src/Client.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/FileShare/src/Client.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="10"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Setup.java" partName="Setup.java" path="/Users/belovedjudymou/Documents/Git/CS141b/FileShare/src/Setup.java" title="Setup.java" tooltip="FileShare/src/Setup.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/FileShare/src/Setup.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="242" selectionTopPixel="0"/>
+<editor activePart="true" focus="true" id="com.google.gwt.eclipse.core.editors.gwtJavaEditor" name="CollaboratorServiceImpl.java" partName="CollaboratorServiceImpl.java" path="C:/Users/tma/CS141b/hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/server/CollaboratorServiceImpl.java" title="CollaboratorServiceImpl.java" tooltip="cs141b-hw2/src/edu/caltech/cs141b/hw2/gwt/collab/server/CollaboratorServiceImpl.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/cs141b-hw2/src/edu/caltech/cs141b/hw2/gwt/collab/server/CollaboratorServiceImpl.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1110" selectionTopPixel="345"/>
 </editor>
 </editors>
 <views>
@@ -57,8 +53,8 @@
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
+<category IMemento.internal.id="Errors (2 items)"/>
 <category IMemento.internal.id="Warnings"/>
-<category IMemento.internal.id="Errors"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="84" org.eclipse.ui.ide.markerType="114" org.eclipse.ui.ide.pathField="144" org.eclipse.ui.ide.resourceField="114" org.eclipse.ui.ide.severityAndDescriptionField="300"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -66,8 +62,10 @@
 <visible IMemento.internal.id="org.eclipse.ui.ide.pathField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.locationField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.markerType"/>
-<DESCENDING_FIELDS IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 </viewState>
+</view>
+<view id="org.eclipse.ui.console.ConsoleView" partName="Console">
+<viewState/>
 </view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
 <viewState group_libraries="1" layout="2" linkWithEditor="0" rootMode="1" workingSetName="">
@@ -93,6 +91,7 @@
 <child filterId="org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*" isEnabled="true"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.EmptyLibraryContainerFilter" isEnabled="true"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.SyntheticMembersFilter" isEnabled="true"/>
+<child filterId="org.eclipse.m2e.MavenModuleFilter" isEnabled="false"/>
 <child filterId="org.eclipse.mylyn.java.ui.MembersFilter" isEnabled="false"/>
 </xmlDefinedFilters>
 </customFilters>
@@ -109,6 +108,7 @@
 <sort4 sortDirection="1" sortKey="NONE"/>
 <sort5 sortDirection="1" sortKey="NONE"/>
 <sort6 sortDirection="1" sortKey="NONE"/>
+<sort7 sortDirection="1" sortKey="NONE"/>
 </sorter>
 </sorter>
 <filteredTreeFindHistory/>
@@ -120,9 +120,12 @@
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration">
 <viewState/>
 </view>
+<view id="com.google.gwt.eclipse.DevModeView" partName="Development Mode">
+<viewState/>
+</view>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.ui.views.ProblemView" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.mylyn.context.ui.actionSet"/>
@@ -136,10 +139,6 @@
 <alwaysOnActionSet id="org.eclipse.ui.externaltools.ExternalToolsSet"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.keyBindings"/>
 <alwaysOnActionSet id="org.eclipse.ui.actionSet.openFiles"/>
-<alwaysOnActionSet id="org.eclipse.team.svn.ui.menu.help"/>
-<alwaysOnActionSet id="adt.actionSet.wizards"/>
-<alwaysOnActionSet id="adt.actionSet.refactorings"/>
-<alwaysOnActionSet id="adt.actionSet.avdManager"/>
 <alwaysOnActionSet id="org.eclipse.debug.ui.launchActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.ui.JavaElementCreationActionSet"/>
@@ -147,6 +146,7 @@
 <alwaysOnActionSet id="org.eclipse.debug.ui.breakpointActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.debug.ui.JDTDebugActionSet"/>
 <alwaysOnActionSet id="org.eclipse.jdt.junit.JUnitActionSet"/>
+<alwaysOnActionSet id="org.eclipse.wb.core.ui.actionset"/>
 <alwaysOnActionSet id="com.google.gdt.eclipse.core.actionSet"/>
 <show_view_action id="org.eclipse.jdt.ui.PackageExplorer"/>
 <show_view_action id="org.eclipse.jdt.ui.TypeHierarchy"/>
@@ -198,6 +198,8 @@
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
 <view id="org.eclipse.search.ui.views.SearchView"/>
+<view id="org.eclipse.ui.console.ConsoleView"/>
+<view id="com.google.gwt.eclipse.DevModeView"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.mylyn.tasks.ui.views.tasks"/>
 <fastViewBars/>
@@ -224,21 +226,23 @@
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.29992107" ratioLeft="380" ratioRight="887" relationship="2" relative="left"/>
-<info folder="true" part="bottom" ratio="0.74963397" ratioLeft="512" ratioRight="171" relationship="4" relative="org.eclipse.ui.editorss">
-<folder activePageID="org.eclipse.jdt.ui.SourceView" appearance="2" expanded="2">
+<info folder="true" part="bottom" ratio="0.5828313" ratioLeft="387" ratioRight="277" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="org.eclipse.ui.views.ProblemView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="Javadoc"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="Declaration"/>
 <page content="org.eclipse.search.ui.views.SearchView" label="Search"/>
-<page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
+<page content="com.google.gwt.eclipse.DevModeView" label="Development Mode"/>
+<page content="org.eclipse.ui.console.ConsoleView" label="Console"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ProgressView" label="LabelNotFound"/>
-<page content="com.google.gwt.eclipse.DevModeView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
@@ -268,7 +272,6 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/server/CollaboratorServiceImpl.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/shared/UnlockedDocument.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/client/DocSaver.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/client/DocReleaser.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/client/DocReader.java"/>
@@ -280,156 +283,157 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/client/CollaboratorService.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FileShare/src/Setup.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/FileShare/src/Client.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.google.gwt.eclipse.core.editors.gwtJavaEditor" path="/cs141b-hw2/src/edu/caltech/cs141b/hw2/gwt/collab/server/CollaboratorServiceImpl.java"/>
 </editors>
-<item historyLabel="UnlockedDocument.java" index="1">
+<item historyLabel="DocSaver.java" index="1">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="DocReleaser.java" index="2">
 <position info="not_deleted" x="0" y="0"/>
 </item>
 <item historyLabel="CollaboratorServiceImpl.java" index="0">
 <position info="not_deleted" x="1165" y="0"/>
 </item>
-<item historyLabel="UnlockedDocument.java" index="1">
-<position info="not_deleted" x="199" y="16"/>
-</item>
-<item historyLabel="DocSaver.java" index="2">
+<item historyLabel="DocReader.java" index="3">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="DocReleaser.java" index="3">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceImpl.java" index="0">
-<position info="not_deleted" x="1165" y="0"/>
-</item>
-<item historyLabel="DocReader.java" index="4">
+<item historyLabel="Collaborator.java" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="DocLister.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Collaborator.java" index="6">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="Collaborator.java" index="6">
+<item historyLabel="Collaborator.java" index="5">
 <position info="not_deleted" x="943" y="12"/>
 </item>
 <item historyLabel="CollaboratorServiceImpl.java" index="0">
 <position info="not_deleted" x="1165" y="0"/>
 </item>
-<item historyLabel="DocLister.java" index="5">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="415" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
-<item historyLabel="DocLister.java" index="5">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="415" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
-<item historyLabel="DocLister.java" index="5">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="415" y="0"/>
 </item>
 <item historyLabel="CollaboratorServiceImpl.java" index="0">
 <position info="not_deleted" x="1165" y="0"/>
 </item>
-<item historyLabel="Collaborator.java" index="6">
+<item historyLabel="Collaborator.java" index="5">
 <position info="not_deleted" x="943" y="12"/>
 </item>
 <item historyLabel="CollaboratorServiceImpl.java" index="0">
 <position info="not_deleted" x="1165" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
 <item historyLabel="CollaboratorServiceImpl.java" index="0">
 <position info="not_deleted" x="1165" y="0"/>
 </item>
-<item historyLabel="DocLister.java" index="5">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="415" y="0"/>
 </item>
-<item historyLabel="DocLocker.java" index="8">
+<item historyLabel="DocLocker.java" index="7">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="DocReader.java" index="4">
+<item historyLabel="DocReader.java" index="3">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="DocReleaser.java" index="3">
+<item historyLabel="DocReleaser.java" index="2">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="DocSaver.java" index="2">
+<item historyLabel="DocSaver.java" index="1">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="DocReleaser.java" index="3">
+<item historyLabel="DocReleaser.java" index="2">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
-<item historyLabel="Collaborator.java" index="6">
+<item historyLabel="Collaborator.java" index="5">
 <position info="not_deleted" x="2246" y="24"/>
 </item>
-<item historyLabel="CollaboratorEntryPoint.java" index="9">
+<item historyLabel="CollaboratorEntryPoint.java" index="8">
 <position info="not_deleted" x="630" y="0"/>
 </item>
-<item historyLabel="CollaboratorEntryPoint.java" index="9">
+<item historyLabel="CollaboratorEntryPoint.java" index="8">
 <position info="not_deleted" x="648" y="22"/>
 </item>
-<item historyLabel="CollaboratorService.java" index="10">
+<item historyLabel="CollaboratorService.java" index="9">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
-<item historyLabel="CollaboratorService.java" index="10">
+<item historyLabel="CollaboratorService.java" index="9">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
-<item historyLabel="Collaborator.java" index="6">
+<item historyLabel="Collaborator.java" index="5">
 <position info="not_deleted" x="2246" y="24"/>
 </item>
-<item historyLabel="DocLister.java" index="5">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="683" y="0"/>
 </item>
-<item historyLabel="Collaborator.java" index="6">
+<item historyLabel="Collaborator.java" index="5">
 <position info="not_deleted" x="1053" y="13"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
-<item historyLabel="Collaborator.java" index="6">
+<item historyLabel="Collaborator.java" index="5">
 <position info="not_deleted" x="1053" y="13"/>
 </item>
-<item historyLabel="DocLister.java" index="5">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="688" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
-<item historyLabel="DocLister.java" index="5">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="688" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position/>
 </item>
-<item historyLabel="DocLister.java" index="5">
+<item historyLabel="DocLister.java" index="4">
 <position info="not_deleted" x="748" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position info="not_deleted" x="463" y="13"/>
 </item>
-<item historyLabel="Setup.java" index="11">
+<item historyLabel="Setup.java" index="10">
 <position info="not_deleted" x="242" y="0"/>
 </item>
-<item historyLabel="CollaboratorServiceAsync.java" index="7">
+<item historyLabel="CollaboratorServiceAsync.java" index="6">
 <position info="not_deleted" x="839" y="0"/>
 </item>
-<item historyLabel="Setup.java" index="11">
+<item historyLabel="Setup.java" index="10">
 <position info="not_deleted" x="242" y="0"/>
 </item>
-<item active="true" historyLabel="Client.java" index="12">
+<item historyLabel="Client.java" index="11">
+<position info="not_deleted" x="363" y="0"/>
+</item>
+<item historyLabel="CollaboratorServiceImpl.java" index="12">
 <position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="CollaboratorServiceImpl.java" index="12">
+<position info="not_deleted" x="969" y="0"/>
+</item>
+<item active="true" historyLabel="CollaboratorServiceImpl.java" index="12">
+<position info="not_deleted" x="1110" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -438,6 +442,7 @@
 <actionBarAdvisor/>
 <trimLayout>
 <trimArea IMemento.internal.id="128">
+<trimItem IMemento.internal.id="org.eclipse.mylyn.tasks.ui.trim.container"/>
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
 <trimArea IMemento.internal.id="1024">
@@ -449,6 +454,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="com.google.gwt.eclipse.core.editors.gwtJavaEditor" name="CollaboratorServiceImpl.java" tooltip="cs141b-hw2/src/edu/caltech/cs141b/hw2/gwt/collab/server/CollaboratorServiceImpl.java">
+<persistable path="/cs141b-hw2/src/edu/caltech/cs141b/hw2/gwt/collab/server/CollaboratorServiceImpl.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="UnlockedDocument.java" tooltip="hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/shared/UnlockedDocument.java">
 <persistable path="/hw2client/hw2/src/edu/caltech/cs141b/hw2/gwt/collab/shared/UnlockedDocument.java"/>
 </file>
