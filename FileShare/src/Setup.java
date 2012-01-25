@@ -7,7 +7,7 @@ public class Setup {
 
 	public static void main(String arg[]) {
 		// Constants
-		int numOfClient = 20;
+		int numOfClient = 8;
 		int numOfIter = 50;
 		
 		/* Instantiate the Queues

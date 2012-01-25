@@ -1,0 +1,26 @@
+package edu.caltech.cs141b.hw2.gwt.collab.server;
+
+import java.util.Date;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Persistent;
+
+public class DocumentJDO {
+	
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long key = null;
+	
+	@Persistent
+	private String title = null;
+	
+	@Persistent
+	private String contents = null;
+	
+	@Persistent
+	private String lockedBy = null;
+	
+	@Persistent
+	private Date lockedUntil = null;
+	
+	
+
+}
