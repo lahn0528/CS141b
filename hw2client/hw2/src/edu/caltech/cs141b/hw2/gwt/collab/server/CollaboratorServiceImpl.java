@@ -55,12 +55,47 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 	public LockedDocument lockDocument(String documentKey)
 			throws LockUnavailable {
 		
-		return null;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		
+		LockedDocument lockedDoc = null;
+		DocumentJDO document = null;
+		try {
+			tx.begin();
+			
+			document = pm.getObjectById(DocumentJDO.class, documentKey);
+			lockedDoc = document.lock();
+			
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		}
+		
+		return lockedDoc;
 	}
 
 	@Override
 	public UnlockedDocument getDocument(String documentKey) {
-		return null;
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		Transaction tx = pm.currentTransaction();
+		
+		UnlockedDocument unlockedDoc = null;
+		DocumentJDO document;
+		try {
+			tx.begin();
+			
+			document = pm.getObjectById(DocumentJDO.class, documentKey);
+			unlockedDoc = document.unlock();
+			
+			tx.commit();
+		} finally {
+			if (tx.isActive()) {
+				tx.rollback();
+			}
+		}
+		return unlockedDoc;
 	}
 
 	@Override
