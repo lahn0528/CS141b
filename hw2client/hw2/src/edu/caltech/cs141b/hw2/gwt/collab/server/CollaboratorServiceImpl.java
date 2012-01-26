@@ -1,5 +1,6 @@
 package edu.caltech.cs141b.hw2.gwt.collab.server;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -76,8 +77,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
             if (doc.getKey() == null) {
             	document = new DocumentJDO(doc.getTitle(), doc.getContents(),
             		doc.getLockedBy(), doc.getLockedUntil());
-            } 
-            else {
+            } else {
             	document = pm.getObjectById(DocumentJDO.class, doc.getKey());
             }
             unlockedDoc = document.unlock();
@@ -97,10 +97,18 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		
+		DocumentJDO document;
 		try {
 			tx.begin();
-			if (doc)
-			
+			Date currentDate = new Date();
+			if (doc.getLockedUntil().before(currentDate)) {
+				throw new LockExpired("Lock expired before" + doc.getLockedBy() +
+						"attempting to release document: " + doc.getTitle());
+			} else {
+				document = pm.getObjectById(DocumentJDO.class, doc.getKey());
+				document.setLockedBy(null);
+				document.setLockedUntil(null);
+			}
 			tx.commit();
 		} finally {
 			if (tx.isActive()) {

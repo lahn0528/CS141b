@@ -1,16 +1,25 @@
 package edu.caltech.cs141b.hw2.gwt.collab.server;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
+
 import java.util.Date;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
+import javax.management.timer.Timer;
 
 import edu.caltech.cs141b.hw2.gwt.collab.shared.DocumentMetadata;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
+@PersistenceCapable
 public class DocumentJDO {
 	
+	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private String key;
+	private Key key;
 	
 	@Persistent
 	private String title = null;
@@ -32,33 +41,27 @@ public class DocumentJDO {
 		this.lockedBy = lockedBy;
 		this.lockedUntil = lockedUntil;
 	}
-	
-	public DocumentJDO(String key, String title, String contents,
-			String lockedBy, Date lockedUntil) {
-		super();
-		this.key = key;
-		this.title = title;
-		this.contents = contents;
-		this.lockedBy = lockedBy;
-		this.lockedUntil = lockedUntil;
-	}
 
 	public UnlockedDocument unlock() {
 		lockedBy = null;
 		lockedUntil = null;
-		return new UnlockedDocument(key, title, contents);
+		return new UnlockedDocument(getKey(), title, contents);
+	}
+	
+	public LockedDocument lock() {
+		lockedBy = null;
+		Date now = new Date();
+		lockedUntil = new Date(now.getTime());
+		return new LockedDocument(lockedBy, lockedUntil, getKey(), title, contents);
+		
 	}
 	
 	public DocumentMetadata getDocumentMetdataObject() {
-		return new DocumentMetadata(key, title);
+		return new DocumentMetadata(getKey(), title);
 	}
 	
 	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
+		return KeyFactory.keyToString(key);
 	}
 
 	public String getTitle() {
