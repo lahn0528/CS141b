@@ -4,6 +4,8 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 import java.util.Date;
+import java.util.logging.Logger;
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PersistenceCapable;
@@ -16,6 +18,7 @@ import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
 @PersistenceCapable
 public class DocumentJDO {
+	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString());
 	
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -32,6 +35,8 @@ public class DocumentJDO {
 	
 	@Persistent
 	private Date lockedUntil = null;
+	
+	
 
 	public DocumentJDO(String title, String contents,
 			String lockedBy, Date lockedUntil) {
@@ -42,16 +47,19 @@ public class DocumentJDO {
 		this.lockedUntil = lockedUntil;
 	}
 
-	public UnlockedDocument unlock() {
-		lockedBy = null;
-		lockedUntil = null;
+	public UnlockedDocument getUnlockedDocumentVersion() {
 		return new UnlockedDocument(getKey(), title, contents);
 	}
 	
-	public LockedDocument lock() {
+	public void unlock() {
 		lockedBy = null;
+		lockedUntil = null;
+	}
+	
+	public LockedDocument lock(String client) {
+		lockedBy = client;
 		Date now = new Date();
-		lockedUntil = new Date(now.getTime());
+		lockedUntil = new Date(now.getTime() + 10000);
 		return new LockedDocument(lockedBy, lockedUntil, getKey(), title, contents);
 		
 	}
@@ -61,6 +69,7 @@ public class DocumentJDO {
 	}
 	
 	public String getKey() {
+		System.out.println("key: " + key);
 		return KeyFactory.keyToString(key);
 	}
 

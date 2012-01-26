@@ -29,21 +29,22 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		CollaboratorService {
 	
-	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString());
-	
 	@Override
 	public List<DocumentMetadata> getDocumentList() {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query = pm.newQuery();
+		Transaction tx = pm.currentTransaction();
 		
-		DocumentJDO[] docs;
-		List<DocumentMetadata> docsList;
+		Query query = pm.newQuery(DocumentJDO.class);
+		List<DocumentMetadata> docsList = new ArrayList<DocumentMetadata>();
 		try {
-			docs = (DocumentJDO[]) ((List<DocumentJDO>) query.execute()).toArray();
-			docsList = new ArrayList<DocumentMetadata>();
-			for (int i = 0; i < docs.length; i ++) {
-				docsList.add(docs[i].getDocumentMetdataObject());
+			tx.begin();
+			List<DocumentJDO> results = ((List<DocumentJDO>) query.execute());
+			if (!results.isEmpty()) {
+				for (DocumentJDO d: results) {
+					docsList.add(d.getDocumentMetdataObject());
+				}
 			}
+			tx.commit();
 		} finally {
 			query.closeAll();
 		}
@@ -51,52 +52,53 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		return docsList;
 	}
 
-	@Override
-	public LockedDocument lockDocument(String documentKey)
-			throws LockUnavailable {
-		
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		
-		LockedDocument lockedDoc = null;
-		DocumentJDO document = null;
-		try {
-			tx.begin();
-			
-			document = pm.getObjectById(DocumentJDO.class, documentKey);
-			lockedDoc = document.lock();
-			
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-		}
-		
-		return lockedDoc;
-	}
+    @Override
+    public LockedDocument lockDocument(String documentKey)
+            throws LockUnavailable {
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        
+        LockedDocument lockedDoc = null;
+        try {
+            tx.begin();   
+            DocumentJDO document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(documentKey));
+            Date now = new Date();
+            if (document.getLockedBy() == null || document.getLockedUntil().before(now)) {
+            	// modify getLocked  and lockedUntil field
+                lockedDoc = document.lock(getThreadLocalRequest().getRemoteAddr());
+            } else {
+            	throw new LockUnavailable("Lock for " + document.getTitle() + 
+            			" is unavailable. The lock will be released at or before " +
+            			document.getLockedUntil().toString());
+            }
+            tx.commit();
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        }
+        
+        return lockedDoc;
+    }
 
 	@Override
-	public UnlockedDocument getDocument(String documentKey) {
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		
-		UnlockedDocument unlockedDoc = null;
-		DocumentJDO document;
-		try {
-			tx.begin();
-			
-			document = pm.getObjectById(DocumentJDO.class, documentKey);
-			unlockedDoc = document.unlock();
-			
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-		}
-		return unlockedDoc;
-	}
+    public UnlockedDocument getDocument(String documentKey) {
+        PersistenceManager pm = PMF.get().getPersistenceManager();
+        Transaction tx = pm.currentTransaction();
+        
+        UnlockedDocument unlockedDoc = null;
+        try {
+            tx.begin();
+            DocumentJDO document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(documentKey));
+            unlockedDoc = document.getUnlockedDocumentVersion();
+            tx.commit();
+        } finally {
+            if (tx.isActive()) {
+                tx.rollback();
+            }
+        }
+        return unlockedDoc;
+    }
 
 	@Override
 	public UnlockedDocument saveDocument(LockedDocument doc)
@@ -112,12 +114,19 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
             if (doc.getKey() == null) {
             	document = new DocumentJDO(doc.getTitle(), doc.getContents(),
             		doc.getLockedBy(), doc.getLockedUntil());
+            	pm.makePersistent(document);
             } else {
-            	document = pm.getObjectById(DocumentJDO.class, doc.getKey());
+            	Date now = new Date();
+            	document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(doc.getKey()));
+            	if (now.before(doc.getLockedUntil())) {
+            		document.setContents(doc.getContents());
+            	} else {
+            		throw new LockExpired("Document " + doc.getTitle() + " lock expired");
+            	}
             }
-            unlockedDoc = document.unlock();
-        	pm.makePersistent(document);
 
+            unlockedDoc = document.getUnlockedDocumentVersion();
+            document.unlock();
             tx.commit();
         } finally {
             if (tx.isActive()) {
@@ -137,12 +146,11 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 			tx.begin();
 			Date currentDate = new Date();
 			if (doc.getLockedUntil().before(currentDate)) {
-				throw new LockExpired("Lock expired before" + doc.getLockedBy() +
-						"attempting to release document: " + doc.getTitle());
+				throw new LockExpired("Lock expired before attempting to release " +
+						"document: " + doc.getTitle());
 			} else {
-				document = pm.getObjectById(DocumentJDO.class, doc.getKey());
-				document.setLockedBy(null);
-				document.setLockedUntil(null);
+				document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(doc.getKey()));
+				document.unlock();
 			}
 			tx.commit();
 		} finally {
