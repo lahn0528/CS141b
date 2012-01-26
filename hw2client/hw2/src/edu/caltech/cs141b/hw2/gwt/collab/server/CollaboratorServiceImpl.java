@@ -34,12 +34,13 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 	@Override
 	public List<DocumentMetadata> getDocumentList() {
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query = pm.newQuery();
+		Query query = pm.newQuery(DocumentJDO.class);
 		
 		DocumentJDO[] docs;
 		List<DocumentMetadata> docsList;
 		try {
-			docs = (DocumentJDO[]) ((List<DocumentJDO>) query.execute()).toArray();
+			List<DocumentJDO> temp = ((List<DocumentJDO>) query.execute());
+			docs = (DocumentJDO[]) temp.toArray();
 			docsList = new ArrayList<DocumentMetadata>();
 			for (int i = 0; i < docs.length; i ++) {
 				docsList.add(docs[i].getDocumentMetdataObject());
