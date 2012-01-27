@@ -5541,3 +5541,47 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 
 !ENTRY org.eclipse.ui 4 4 2012-01-26 04:21:14.866
 !MESSAGE Invalid preference page path: CSS Files
+
+!ENTRY com.google.appengine.eclipse.core 4 0 2012-01-26 04:25:36.581
+!MESSAGE Unable to update app: Error posting to URL: https://appengine.google.com/api/appversion/create?app_id=caltech141&version=1&
+404 Not Found
+This application does not exist (app_id=u'caltech141').
+
+
+See the deployment console for more details
+!STACK 0
+com.google.appengine.tools.admin.AdminException: Unable to update app: Error posting to URL: https://appengine.google.com/api/appversion/create?app_id=caltech141&version=1&
+404 Not Found
+This application does not exist (app_id=u'caltech141').
+
+	at com.google.appengine.tools.admin.AppAdminImpl.doUpdate(AppAdminImpl.java:333)
+	at com.google.appengine.tools.admin.AppAdminImpl.update(AppAdminImpl.java:52)
+	at com.google.appengine.eclipse.core.proxy.AppEngineBridgeImpl.deploy(AppEngineBridgeImpl.java:400)
+	at com.google.appengine.eclipse.core.deploy.DeployProjectJob.runInWorkspace(DeployProjectJob.java:148)
+	at org.eclipse.core.internal.resources.InternalWorkspaceJob.run(InternalWorkspaceJob.java:38)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Caused by: com.google.appengine.tools.admin.HttpIoException: Error posting to URL: https://appengine.google.com/api/appversion/create?app_id=caltech141&version=1&
+404 Not Found
+This application does not exist (app_id=u'caltech141').
+
+	at com.google.appengine.tools.admin.AbstractServerConnection.send1(AbstractServerConnection.java:282)
+	at com.google.appengine.tools.admin.AbstractServerConnection.send(AbstractServerConnection.java:235)
+	at com.google.appengine.tools.admin.AbstractServerConnection.post(AbstractServerConnection.java:214)
+	at com.google.appengine.tools.admin.AppVersionUpload.send(AppVersionUpload.java:606)
+	at com.google.appengine.tools.admin.AppVersionUpload.beginTransaction(AppVersionUpload.java:414)
+	at com.google.appengine.tools.admin.AppVersionUpload.doUpload(AppVersionUpload.java:122)
+	at com.google.appengine.tools.admin.AppAdminImpl.doUpdate(AppAdminImpl.java:328)
+	... 5 more
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2012-01-26 04:27:08.652
+!MESSAGE cs141b-hw2 successfully deployed to Google App Engine
+!SESSION 2012-01-26 15:01:02.188 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_25
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2012-01-26 22:29:34.365
+!MESSAGE cs141b-hw2 successfully deployed to Google App Engine
