@@ -5585,3 +5585,132 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.e
 
 !ENTRY com.google.appengine.eclipse.core 1 0 2012-01-26 22:29:34.365
 !MESSAGE cs141b-hw2 successfully deployed to Google App Engine
+!SESSION 2012-01-30 23:27:04.547 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_25
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.ui 4 4 2012-01-30 23:31:57.519
+!MESSAGE Invalid preference page path: CSS Files
+!SESSION 2012-01-31 14:47:57.384 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_25
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.jobs 2 2 2012-01-31 14:48:35.456
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.ui.internal.Workbench$63
+!SESSION 2012-01-31 14:50:37.095 -----------------------------------------------
+eclipse.buildId=I20110613-1736
+java.version=1.6.0_25
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jdt.core 4 4 2012-01-31 14:58:52.622
+!MESSAGE JavaBuilder handling ImageBuilderInternalException while building: cs141b-hw2
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:793)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:46)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Contains: Could not delete '/cs141b-hw2/war/WEB-INF/classes/edu'.
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:352)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:352)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:798)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1935)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:780)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:46)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2\gwt\collab.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2\gwt.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu.
+!SUBENTRY 1 org.eclipse.core.resources 4 273 2012-01-31 14:58:52.625
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 2 org.eclipse.core.resources 4 273 2012-01-31 14:58:52.625
+!MESSAGE Could not delete '/cs141b-hw2/war/WEB-INF/classes/edu'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:352)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:352)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:798)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1935)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:780)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:114)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:46)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:254)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:173)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:728)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:199)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:239)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:292)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:295)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:351)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:374)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:143)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:241)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2\gwt\collab.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2\gwt.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech.
+Contains: Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu.
+!SUBENTRY 3 org.eclipse.core.resources 4 273 2012-01-31 14:58:52.625
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 4 org.eclipse.core.filesystem 4 273 2012-01-31 14:58:52.625
+!MESSAGE Problems encountered while deleting files.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2012-01-31 14:58:52.625
+!MESSAGE Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2\gwt\collab.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2012-01-31 14:58:52.625
+!MESSAGE Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2\gwt.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2012-01-31 14:58:52.626
+!MESSAGE Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b\hw2.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2012-01-31 14:58:52.626
+!MESSAGE Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech\cs141b.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2012-01-31 14:58:52.626
+!MESSAGE Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu\caltech.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2012-01-31 14:58:52.626
+!MESSAGE Could not delete: C:\Users\tma\CS141b\hw2client\hw2\war\WEB-INF\classes\edu.

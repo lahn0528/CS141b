@@ -22,25 +22,25 @@ import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
  * Main class for a single Collaborator widget.
  */
 public class Collaborator extends Composite implements ClickHandler, ChangeHandler {
-	
+
 	protected CollaboratorServiceAsync collabService;
-	
+
 	// Track document information.
 	protected UnlockedDocument readOnlyDoc = null;
 	protected LockedDocument lockedDoc = null;
-	
+
 	// Managing available documents.
 	protected ListBox documentList = new ListBox();
 	private Button refreshList = new Button("Refresh Document List");
 	private Button createNew = new Button("Create New Document");
-	
+
 	// For displaying document information and editing document content.
 	protected TextBox title = new TextBox();
 	protected RichTextArea contents = new RichTextArea();
 	protected Button refreshDoc = new Button("Refresh Document");
 	protected Button lockButton = new Button("Get Document Lock");
 	protected Button saveButton = new Button("Save Document");
-	
+
 	// Callback objects.
 	protected DocLister lister = new DocLister(this);
 	protected DocReader reader = new DocReader(this);
@@ -48,10 +48,10 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	protected DocReleaser releaser = new DocReleaser(this);
 	private DocSaver saver = new DocSaver(this);
 	protected String waitingKey = null;
-	
+
 	// Status tracking.
 	private VerticalPanel statusArea = new VerticalPanel();
-	
+
 	/**
 	 * UI initialization.
 	 * 
@@ -63,7 +63,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		outerHp.setWidth("100%");
 		VerticalPanel outerVp = new VerticalPanel();
 		outerVp.setSpacing(20);
-		
+
 		VerticalPanel vp = new VerticalPanel();
 		vp.setSpacing(10);
 		vp.add(new HTML("<h2>Available Documents</h2>"));
@@ -78,7 +78,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		dp.setWidth("100%");
 		dp.add(vp);
 		outerVp.add(dp);
-		
+
 		vp = new VerticalPanel();
 		vp.setSpacing(10);
 		vp.add(new HTML("<h2>Selected Document</h2>"));
@@ -96,7 +96,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		dp.setWidth("100%");
 		dp.add(vp);
 		outerVp.add(dp);
-		
+
 		outerHp.add(outerVp);
 		outerVp = new VerticalPanel();
 		outerVp.setSpacing(20);
@@ -107,22 +107,22 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		dp.add(statusArea);
 		outerVp.add(dp);
 		outerHp.add(outerVp);
-		
+
 		refreshList.addClickHandler(this);
 		createNew.addClickHandler(this);
 		refreshDoc.addClickHandler(this);
 		lockButton.addClickHandler(this);
 		saveButton.addClickHandler(this);
-		
+
 		documentList.addChangeHandler(this);
 		documentList.setVisibleItemCount(10);
-		
+
 		setDefaultButtons();
 		initWidget(outerHp);
-		
+
 		lister.getDocumentList();
 	}
-	
+
 	/**
 	 * Resets the state of the buttons and edit objects to their default.
 	 * 
@@ -136,7 +136,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		title.setEnabled(false);
 		contents.setEnabled(false);
 	}
-	
+
 	/**
 	 * Behaves similarly to locking a document, except without a key/lock obj.
 	 */
@@ -148,7 +148,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		locker.gotDoc(lockedDoc);
 		History.newItem("new");
 	}
-	
+
 	/**
 	 * Returns the currently active token.
 	 * 
@@ -166,7 +166,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 			return "list";
 		}
 	}
-	
+
 	/**
 	 * Modifies the current state to reflect the supplied token.
 	 * 
@@ -185,7 +185,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 			reader.getDocument(args);
 		}
 	}
-	
+
 	/**
 	 * Adds status lines to the console window to enable transparency of the
 	 * underlying processes.
@@ -246,7 +246,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 			reader.getDocument(key);
 		}
 	}
-	
+
 	/**
 	 * Used to release existing locks when the active document changes.
 	 * 
