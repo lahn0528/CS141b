@@ -10,6 +10,7 @@ import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 public class DocSaver implements AsyncCallback<UnlockedDocument> {
 	
 	private Collaborator collaborator;
+	private int i;
 	
 	public DocSaver(Collaborator collaborator) {
 		this.collaborator = collaborator;
@@ -22,6 +23,18 @@ public class DocSaver implements AsyncCallback<UnlockedDocument> {
 		collaborator.saveButton.setEnabled(false);
 		collaborator.title.setEnabled(false);
 		collaborator.contents.setEnabled(false);
+		
+		
+		for (i = 0; i <collaborator.tabDocuments.size(); i++) {
+			String key = collaborator.tabDocuments.get(i).getKey();
+			if (key != null && key.equals(lockedDoc.getKey())) {
+				break;
+			}
+		}
+		if (i == collaborator.tabDocuments.size())
+			i--;
+		collaborator.tabDocuments.get(i).setSaveButton(false);
+		
 	}
 
 	@Override
@@ -47,6 +60,10 @@ public class DocSaver implements AsyncCallback<UnlockedDocument> {
 				+ "' successfully saved.");
 		if (collaborator.waitingKey == null || 
 				result.getKey().equals(collaborator.waitingKey)) {
+			
+			collaborator.tabDocuments.get(i).setKey(result.getKey());
+			collaborator.tabPanel.getTabBar().setTabHTML(i, result.getTitle());
+			
 			collaborator.reader.gotDoc(result);
 			// Refresh list in case title was changed.
 			collaborator.lister.getDocumentList();

@@ -1,8 +1,13 @@
 package edu.caltech.cs141b.hw2.gwt.collab.client;
 
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.TabPanel;
+import com.google.gwt.user.client.ui.RichTextArea;
+import com.google.gwt.user.client.ui.TextBox;
 
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
@@ -33,6 +38,7 @@ public class DocReader implements AsyncCallback<UnlockedDocument> {
 
 	@Override
 	public void onSuccess(UnlockedDocument result) {
+		System.out.println("waiting key: " + collaborator.waitingKey);
 		if (result.getKey().equals(collaborator.waitingKey)) {
 			collaborator.statusUpdate("Document '" + result.getTitle()
 					+ "' successfully retrieved.");
@@ -51,12 +57,26 @@ public class DocReader implements AsyncCallback<UnlockedDocument> {
 	 * @param result the unlocked document that should be displayed
 	 */
 	protected void gotDoc(UnlockedDocument result) {
+		
+		
 		collaborator.readOnlyDoc = result;
 		collaborator.lockedDoc = null;
+		
+		int tabIndex = collaborator.setTabWidget(result.getKey(), result.getTitle());
+		
+		
 		collaborator.title.setValue(result.getTitle());
 		collaborator.contents.setHTML(result.getContents());
+		
 		collaborator.setDefaultButtons();
+		collaborator.tabDocuments.get(tabIndex).setRefreshDoc(true);
+		collaborator.tabDocuments.get(tabIndex).setLockButton(true);
+		collaborator.tabDocuments.get(tabIndex).setSaveButton(false);
+		
 		History.newItem(result.getKey());
+		System.out.println("I already set read ONly doc as result:"+ result);
+		collaborator.tabPanel.selectTab(tabIndex);
+		
 	}
 }
 

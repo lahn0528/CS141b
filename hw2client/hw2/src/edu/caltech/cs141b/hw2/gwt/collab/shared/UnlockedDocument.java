@@ -40,5 +40,9 @@ public class UnlockedDocument implements IsSerializable {
 		return contents;
 	}
 	
+	public UnlockedDocument getCopy() {
+		return new UnlockedDocument(key, title, contents);
+	}
+	
 }
 
