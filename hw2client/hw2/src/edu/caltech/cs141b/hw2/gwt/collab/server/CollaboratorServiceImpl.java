@@ -29,10 +29,6 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		CollaboratorService {
-<<<<<<< HEAD
-
-	@Override
-=======
 	// Used for logging purposes
 	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString());
 	
@@ -42,15 +38,10 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 	 * @param None
 	 * @return docsList : List of the metadata of the currently available documents
 	 */
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public List<DocumentMetadata> getDocumentList() {
 		// Instantiate JDO-aware application components
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
-<<<<<<< HEAD
-
-=======
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 		Query query = pm.newQuery(DocumentJDO.class);
 		
 		// Store list of the metadata of the current documents
@@ -162,11 +153,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 	 */
 	public UnlockedDocument saveDocument(LockedDocument doc)
 			throws LockExpired {
-<<<<<<< HEAD
-
-=======
 		// Instantiate JDO-aware application components
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 		PersistenceManager pm = PMF.get().getPersistenceManager();
         Transaction tx = pm.currentTransaction();
         
@@ -211,10 +198,6 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
         }
 		return unlockedDoc;
 	}
-<<<<<<< HEAD
-
-	@Override
-=======
 	
 	/**
 	 * Used to release a lock that is no longer needed without saving.
@@ -226,12 +209,11 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 	 * @throws LockExpired if the locking primitives in the supplied
 	 *         LockedDocument object cannot be used to release the lock
 	 */
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public void releaseLock(LockedDocument doc) throws LockExpired {
 		// Instantiate JDO-aware application components
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
-
+		
 		DocumentJDO document;
 		try {
 			// Start transaction

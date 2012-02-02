@@ -21,31 +21,21 @@ import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
  */
 @PersistenceCapable
 public class DocumentJDO {
-<<<<<<< HEAD
-	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString());
-
-=======
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key key;
-
+	
 	@Persistent
 	private String title = null;
-
+	
 	@Persistent
 	private String contents = null;
-
+	
 	@Persistent
 	private String lockedBy = null;
-
+	
 	@Persistent
 	private Date lockedUntil = null;
-<<<<<<< HEAD
-
-
-
-=======
 	
 	/**
 	 * Constructor for DocumentJDO object
@@ -55,7 +45,6 @@ public class DocumentJDO {
 	 * 	       lockedBy : owner of document (Currently an IP address)
 	 * 		   lockedUntil : Date containing date of when document expires
 	 */
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public DocumentJDO(String title, String contents,
 			String lockedBy, Date lockedUntil) {
 		super();
@@ -75,9 +64,6 @@ public class DocumentJDO {
 	public UnlockedDocument getUnlockedDocumentVersion() {
 		return new UnlockedDocument(getKey(), title, contents);
 	}
-<<<<<<< HEAD
-
-=======
 	
 	/**
 	 * Used to unlock the document.
@@ -85,15 +71,11 @@ public class DocumentJDO {
 	 * @param  None
 	 * @return None
 	 */
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public void unlock() {
 		// Reset ownership and expiration date to null
 		lockedBy = null;
 		lockedUntil = null;
 	}
-<<<<<<< HEAD
-
-=======
 	
 	/**
 	 * Used to lock the document.
@@ -101,7 +83,6 @@ public class DocumentJDO {
 	 * @param  client : current owner of document
 	 * @return LockedDocument object that is a locked version of itself
 	 */
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public LockedDocument lock(String client) {
 		// Set owner to the client that calls this function
 		lockedBy = client;
@@ -110,15 +91,6 @@ public class DocumentJDO {
 		Date now = new Date();
 		lockedUntil = new Date(now.getTime() + 60000);
 		return new LockedDocument(lockedBy, lockedUntil, getKey(), title, contents);
-<<<<<<< HEAD
-
-	}
-
-	public DocumentMetadata getDocumentMetdataObject() {
-		return new DocumentMetadata(getKey(), title);
-	}
-
-=======
 	}
 	
 	/**
@@ -137,8 +109,8 @@ public class DocumentJDO {
 	 * @param  None
 	 * @return String containing the key
 	 */
->>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public String getKey() {
+		System.out.println("key: " + key);
 		return KeyFactory.keyToString(key);
 	}
 
