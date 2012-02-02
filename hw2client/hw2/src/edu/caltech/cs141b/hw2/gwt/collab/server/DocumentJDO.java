@@ -4,7 +4,6 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 import java.util.Date;
-import java.util.logging.Logger;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.Persistent;
@@ -13,13 +12,20 @@ import javax.jdo.annotations.PrimaryKey;
 import javax.management.timer.Timer;
 
 import edu.caltech.cs141b.hw2.gwt.collab.shared.DocumentMetadata;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.LockExpired;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
+/**
+ * Used to contain the entire document as a JDO data object to be stored in a datastore
+ */
 @PersistenceCapable
 public class DocumentJDO {
+<<<<<<< HEAD
 	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString());
 
+=======
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Key key;
@@ -35,32 +41,76 @@ public class DocumentJDO {
 
 	@Persistent
 	private Date lockedUntil = null;
+<<<<<<< HEAD
 
 
 
+=======
+	
+	/**
+	 * Constructor for DocumentJDO object
+	 * 
+	 * @param  title : name of document
+	 * 		   contents : contents of document
+	 * 	       lockedBy : owner of document (Currently an IP address)
+	 * 		   lockedUntil : Date containing date of when document expires
+	 */
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public DocumentJDO(String title, String contents,
 			String lockedBy, Date lockedUntil) {
 		super();
+		// Set parameters to arguments
 		this.title = title;
 		this.contents = contents;
 		this.lockedBy = lockedBy;
 		this.lockedUntil = lockedUntil;
 	}
 
+	/**
+	 * Used to create an UnlockedDocument object. This is just an unlocked version of itself
+	 * 
+	 * @param  None
+	 * @return UnlockedDocument which is the read-only version of the document
+	 */
 	public UnlockedDocument getUnlockedDocumentVersion() {
 		return new UnlockedDocument(getKey(), title, contents);
 	}
+<<<<<<< HEAD
 
+=======
+	
+	/**
+	 * Used to unlock the document.
+	 * 
+	 * @param  None
+	 * @return None
+	 */
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public void unlock() {
+		// Reset ownership and expiration date to null
 		lockedBy = null;
 		lockedUntil = null;
 	}
+<<<<<<< HEAD
 
+=======
+	
+	/**
+	 * Used to lock the document.
+	 * 
+	 * @param  client : current owner of document
+	 * @return LockedDocument object that is a locked version of itself
+	 */
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public LockedDocument lock(String client) {
+		// Set owner to the client that calls this function
 		lockedBy = client;
+		
+		// Set expiration to be current date + 1 minute
 		Date now = new Date();
-		lockedUntil = new Date(now.getTime() + 10000);
+		lockedUntil = new Date(now.getTime() + 60000);
 		return new LockedDocument(lockedBy, lockedUntil, getKey(), title, contents);
+<<<<<<< HEAD
 
 	}
 
@@ -68,41 +118,107 @@ public class DocumentJDO {
 		return new DocumentMetadata(getKey(), title);
 	}
 
+=======
+	}
+	
+	/**
+	 * Used to get the serialized document metadata.
+	 * 
+	 * @param  None
+	 * @return DocumentMetadata object containing the metadata
+	 */
+	public DocumentMetadata getDocumentMetdataObject() {
+		return new DocumentMetadata(getKey(), title);
+	}
+	
+	/**
+	 * Used to access the document's key
+	 * 
+	 * @param  None
+	 * @return String containing the key
+	 */
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public String getKey() {
-		System.out.println("key: " + key);
 		return KeyFactory.keyToString(key);
 	}
 
+	/**
+	 * Used to access the document's title
+	 * 
+	 * @param  None
+	 * @return String containing the title
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * Used to modify the document's title
+	 * 
+	 * @param  title : contains new title of document
+	 * @return None
+	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/**
+	 * Used to access the document's contents
+	 * 
+	 * @param  None
+	 * @return String containing the contents
+	 */
 	public String getContents() {
 		return contents;
 	}
 
+	/**
+	 * Used to modify the document's contents
+	 * 
+	 * @param  contents : contains new contents of document
+	 * @return None
+	 */
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
 
+	/**
+	 * Used to access the document's owner
+	 * 
+	 * @param  None
+	 * @return String containing the owner
+	 */
 	public String getLockedBy() {
 		return lockedBy;
 	}
 
+	/**
+	 * Used to modify the document's owner
+	 * 
+	 * @param  lockedBy : contains new owner document
+	 * @return None
+	 */
 	public void setLockedBy(String lockedBy) {
 		this.lockedBy = lockedBy;
 	}
 
+	/**
+	 * Used to access the document's expiration date
+	 * 
+	 * @param  None
+	 * @return Date containing the expiration date
+	 */
 	public Date getLockedUntil() {
 		return lockedUntil;
 	}
 
+	/**
+	 * Used to modify the document's expiration date
+	 * 
+	 * @param  lockedUntil : contains new expiration date of document
+	 * @return None
+	 */
 	public void setLockedUntil(Date lockedUntil) {
 		this.lockedUntil = lockedUntil;
 	}
-
 }

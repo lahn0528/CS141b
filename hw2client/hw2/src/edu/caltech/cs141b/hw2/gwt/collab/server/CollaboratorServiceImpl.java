@@ -3,6 +3,7 @@ package edu.caltech.cs141b.hw2.gwt.collab.server;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
@@ -28,18 +29,41 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 @SuppressWarnings("serial")
 public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		CollaboratorService {
+<<<<<<< HEAD
 
 	@Override
+=======
+	// Used for logging purposes
+	private static final Logger log = Logger.getLogger(CollaboratorServiceImpl.class.toString());
+	
+	/**
+	 * Used to get a list of the currently available documents.
+	 * 
+	 * @param None
+	 * @return docsList : List of the metadata of the currently available documents
+	 */
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public List<DocumentMetadata> getDocumentList() {
+		// Instantiate JDO-aware application components
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
+<<<<<<< HEAD
 
+=======
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 		Query query = pm.newQuery(DocumentJDO.class);
+		
+		// Store list of the metadata of the current documents
 		List<DocumentMetadata> docsList = new ArrayList<DocumentMetadata>();
 		try {
+			// Start transaction
 			tx.begin();
+			log.fine("Getting a list of currently available documents");
+			
+			// Get documents from query
 			List<DocumentJDO> results = ((List<DocumentJDO>) query.execute());
 			if (!results.isEmpty()) {
+				// Add metadata of each document to docsList
 				for (DocumentJDO d: results) {
 					docsList.add(d.getDocumentMetdataObject());
 				}
@@ -48,49 +72,77 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		} finally {
 			query.closeAll();
 		}
-
 		return docsList;
 	}
 
-    @Override
+	/**
+	 * Used to lock an existing document for editing.
+	 * 
+	 * @param documentKey : the key of the document to lock
+	 * @return lockedDoc : LockedDocument object containing the current document state
+	 * @throws LockUnavailable if a lock cannot be obtained
+	 */
     public LockedDocument lockDocument(String documentKey)
             throws LockUnavailable {
+    	// Instantiate JDO-aware application components
         PersistenceManager pm = PMF.get().getPersistenceManager();
         Transaction tx = pm.currentTransaction();
         
         LockedDocument lockedDoc = null;
         try {
+        	// Start transaction
             tx.begin();   
+            
+            // Get document from datastore with given key
             DocumentJDO document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(documentKey));
+            log.fine("Attemping to lock " + document.getTitle() + ".");
+            
+            // Mark current date
             Date now = new Date();
+            
+            // Allow access only if document has no owner or if expiration date has passed
+            // for previous owner. Otherwise, throw exception
             if (document.getLockedBy() == null || document.getLockedUntil().before(now)) {
-            	// modify getLocked  and lockedUntil field
+            	// Lock document. Use client's IP address to determine document ownership
                 lockedDoc = document.lock(getThreadLocalRequest().getRemoteAddr());
             } else {
+            	log.fine("Lock for " + document.getTitle() + 
+            			" is unavailable. Locked until: " + document.getLockedUntil().toString());
             	throw new LockUnavailable("Lock for " + document.getTitle() + 
             			" is unavailable. The lock will be released at or before " +
             			document.getLockedUntil().toString());
             }
+            
             tx.commit();
         } finally {
             if (tx.isActive()) {
                 tx.rollback();
             }
-        }
-        
+        } 
         return lockedDoc;
     }
 
-	@Override
+    /**
+	 * Used to retrieve a document in read-only mode.
+	 * 
+	 * @param documentKey : the key of the document to read
+	 * @return unlockedDoc : UnlockedDocument object which contains the entire document
+	 */
     public UnlockedDocument getDocument(String documentKey) {
+    	// Instantiate JDO-aware application components
         PersistenceManager pm = PMF.get().getPersistenceManager();
         Transaction tx = pm.currentTransaction();
         
         UnlockedDocument unlockedDoc = null;
         try {
+        	// Start transaction
             tx.begin();
+            
+            // Get document with given key and create UnlockedDocument object to return
             DocumentJDO document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(documentKey));
             unlockedDoc = document.getUnlockedDocumentVersion();
+            
+            log.fine("Obtaining document: " + document.getTitle() + " for read-only purpose.");
             tx.commit();
         } finally {
             if (tx.isActive()) {
@@ -100,31 +152,55 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
         return unlockedDoc;
     }
 
-	@Override
+    /**
+	 * Used to save a currently locked document.
+	 * 
+	 * @param  doc : LockedDocument object returned by lockDocument()
+	 * @return unlockedDoc : the read-only version of the saved document
+	 * @throws LockExpired if the locking primitives in the supplied
+	 *         LockedDocument object cannot be used to modify the document
+	 */
 	public UnlockedDocument saveDocument(LockedDocument doc)
 			throws LockExpired {
+<<<<<<< HEAD
 
+=======
+		// Instantiate JDO-aware application components
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 		PersistenceManager pm = PMF.get().getPersistenceManager();
         Transaction tx = pm.currentTransaction();
         
         UnlockedDocument unlockedDoc;
         DocumentJDO document;
         try {
+        	// Start transaction
             tx.begin();
+            
+            // If there is no key, assume new document. Otherwise, try to save document
             if (doc.getKey() == null) {
+                log.info("Adding document " + doc.getTitle() + " to persistence manager.");
+                
+            	// Create new document and store object in datastore
             	document = new DocumentJDO(doc.getTitle(), doc.getContents(),
             		doc.getLockedBy(), doc.getLockedUntil());
             	pm.makePersistent(document);
             } else {
+            	log.fine("Updating document " + doc.getTitle() + " in persistence manager.");
+            	
+            	// Mark current date
             	Date now = new Date();
+            	
+            	// Get document from datastore with given key
             	document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(doc.getKey()));
+            	
+            	// If time has not expired, update document contents. Otherwise, throw exception
             	if (now.before(doc.getLockedUntil())) {
             		document.setContents(doc.getContents());
             	} else {
             		throw new LockExpired("Document " + doc.getTitle() + " lock expired");
             	}
             }
-
+            // Create read-only version and unlock document
             unlockedDoc = document.getUnlockedDocumentVersion();
             document.unlock();
             tx.commit();
@@ -135,20 +211,42 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
         }
 		return unlockedDoc;
 	}
+<<<<<<< HEAD
 
 	@Override
+=======
+	
+	/**
+	 * Used to release a lock that is no longer needed without saving.
+	 * 
+	 * @param  doc : the LockedDocument object returned by lockDocument(); any
+	 *         modifications made to the document properties in this case are
+	 *         ignored
+	 * @return None
+	 * @throws LockExpired if the locking primitives in the supplied
+	 *         LockedDocument object cannot be used to release the lock
+	 */
+>>>>>>> faf3bddf3e3f0c978eeb7ad2286cb008f4c39294
 	public void releaseLock(LockedDocument doc) throws LockExpired {
+		// Instantiate JDO-aware application components
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 
 		DocumentJDO document;
 		try {
+			// Start transaction
 			tx.begin();
+			log.fine("Releasing " + doc.getTitle() + "'s lock.");
+			
+			// Mark current date
 			Date currentDate = new Date();
+			
+			// If document already expired, throw exception. Otherwise, unlock document
 			if (doc.getLockedUntil().before(currentDate)) {
 				throw new LockExpired("Lock expired before attempting to release " +
 						"document: " + doc.getTitle());
 			} else {
+				// Get document from datastore with given key
 				document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(doc.getKey()));
 				document.unlock();
 			}
@@ -159,6 +257,4 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 			}
 		}
 	}
-
 }
-
