@@ -61,5 +61,10 @@ public class LockedDocument implements IsSerializable {
 	public UnlockedDocument unlock() {
 		return new UnlockedDocument(key, title, contents);
 	}
+	
+	public LockedDocument getCopy() {
+		return new LockedDocument(lockedBy, lockedUntil, key,
+				title, contents);
+	}
 }
 
