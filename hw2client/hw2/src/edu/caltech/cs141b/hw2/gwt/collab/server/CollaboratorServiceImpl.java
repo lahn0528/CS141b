@@ -182,6 +182,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
             	
             	// If time has not expired, update document contents. Otherwise, throw exception
             	if (now.before(doc.getLockedUntil())) {
+            		document.setTitle(doc.getTitle());
             		document.setContents(doc.getContents());
             	} else {
             		throw new LockExpired("Document " + doc.getTitle() + " lock expired");

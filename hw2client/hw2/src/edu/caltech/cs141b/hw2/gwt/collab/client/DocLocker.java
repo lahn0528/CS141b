@@ -58,25 +58,29 @@ public class DocLocker implements AsyncCallback<LockedDocument> {
 	 */
 	protected void gotDoc(LockedDocument result) {
 		
-		
+		// Store readOnlyDoc and lockedDoc
 		collaborator.readOnlyDoc = null;
 		collaborator.lockedDoc = result;
-		
 		int tabIndex = collaborator.setTabWidget(result.getKey(), result.getTitle());
+		
+		// Edit the tab display.
 		collaborator.title.setValue(result.getTitle());
 		collaborator.title.setEnabled(true);
 		collaborator.contents.setHTML(result.getContents());
 		collaborator.contents.setEnabled(true);
 		
+		// Set button status, and store these button status information in 
+		// corresponding tab object.
 		collaborator.refreshDoc.setEnabled(false);
 		collaborator.lockButton.setEnabled(false);
 		collaborator.saveButton.setEnabled(true);
-		
 		TabContent current = collaborator.tabDocuments.get(tabIndex);
 		current.setRefreshDoc(false);
 		current.setLockButton(false);
 		current.setSaveButton(true);
 		
+		// Tab should be open and displayed already for existing document.
+		// If writing the document for the first time, jump to the new tab.
 		if (result.getKey() == null) {
 			collaborator.tabPanel.selectTab(tabIndex);
 		}

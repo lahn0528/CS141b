@@ -58,23 +58,24 @@ public class DocReader implements AsyncCallback<UnlockedDocument> {
 	 */
 	protected void gotDoc(UnlockedDocument result) {
 		
-		
+		// Store readOnlyDoc and lockedDoc.
 		collaborator.readOnlyDoc = result;
 		collaborator.lockedDoc = null;
-		
 		int tabIndex = collaborator.setTabWidget(result.getKey(), result.getTitle());
 		
-		
+		// Edit the tab display.
 		collaborator.title.setValue(result.getTitle());
 		collaborator.contents.setHTML(result.getContents());
 		
+		// Set button status, and store these button status information in 
+		// corresponding tab object.
 		collaborator.setDefaultButtons();
 		collaborator.tabDocuments.get(tabIndex).setRefreshDoc(true);
 		collaborator.tabDocuments.get(tabIndex).setLockButton(true);
 		collaborator.tabDocuments.get(tabIndex).setSaveButton(false);
 		
 		History.newItem(result.getKey());
-		System.out.println("I already set read ONly doc as result:"+ result);
+		// Select tab for displaying.
 		collaborator.tabPanel.selectTab(tabIndex);
 		
 	}

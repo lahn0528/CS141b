@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="com.google.gdt.eclipse.designer.model.property.css.StylesEditDialog">
+		<item value="550" key="height"/>
+		<item value="949" key="width"/>
+		<item value="89" key="y"/>
+		<item value="-949" key="x"/>
+	</section>
+</section>

@@ -6,8 +6,6 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ScrollEvent;
-import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.History;
@@ -15,6 +13,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RichTextArea;
@@ -26,31 +25,36 @@ import com.google.gwt.user.client.ui.Widget;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 import com.google.gwt.user.client.ui.TabPanel;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.VerticalSplitPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 
 /**
  * Main class for a single Collaborator widget.
  */
-public class Collaborator extends Composite implements ClickHandler, ChangeHandler, ScrollHandler {
+public class Collaborator extends Composite implements ClickHandler, ChangeHandler {
 	
 	protected CollaboratorServiceAsync collabService;
 	
 	// Track document information.
 	protected UnlockedDocument readOnlyDoc = null;
 	protected LockedDocument lockedDoc = null;
+	
+	// This array list stores tab contents for each tab in the tab panel.
 	protected ArrayList<TabContent> tabDocuments = new ArrayList<TabContent>();
 	
 	// Managing available documents.
 	protected ListBox documentList = new ListBox();
-	private Button refreshList = new Button("Refresh Document List");
-	private Button createNew = new Button("Create New Document");
+	private Button refreshList = new Button("Refresh  List");
+	protected Button createNew = new Button("New Document");
 	
 	// For displaying document information and editing document content.
 	protected TextBox title = new TextBox();
 	protected RichTextArea contents = new RichTextArea();
-	protected Button refreshDoc = new Button("Refresh Document");
-	protected Button lockButton = new Button("Get Document Lock");
-	protected Button saveButton = new Button("Save Document");
+	protected Button refreshDoc = new Button("Refresh");
+	protected Button lockButton = new Button("Get Lock");
+	protected Button saveButton = new Button("Save");
+	protected TabPanel tabPanel = new TabPanel();
 	
 	// Callback objects.
 	protected DocLister lister = new DocLister(this);
@@ -60,14 +64,14 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	private DocSaver saver = new DocSaver(this);
 	protected String waitingKey = null;
 	
-	protected TabPanel tabPanel = new TabPanel();
-	
 	// Status tracking.
 	private VerticalPanel statusArea = new VerticalPanel();
 	private VerticalPanel vp_1;
 	private HorizontalPanel hp_1;
 	private VerticalPanel outerVp_1;
-	private ScrollPanel scrollPanel_1 = new ScrollPanel();
+	private final VerticalPanel verticalPanel = new VerticalPanel();
+	private final ScrollPanel scrollPanel = new ScrollPanel();
+	private final VerticalPanel verticalPanel_1 = new VerticalPanel();
 	
 	/**
 	 * UI initialization.
@@ -77,44 +81,77 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	public Collaborator(CollaboratorServiceAsync collabService) {
 		this.collabService = collabService;
 		HorizontalPanel outerHp = new HorizontalPanel();
-		outerHp.setWidth("100%");
-		VerticalPanel outerVp;
+		outerHp.setStyleName("outer-box");
+		outerHp.setSize("100%", "100%");
 		outerVp_1 = new VerticalPanel();
 		outerVp_1.setSpacing(20);
+		outerVp_1.setStyleName("outerVp_1");
 		
 		VerticalPanel vp = new VerticalPanel();
+		vp.setStyleName("vp2");
+		outerVp_1.add(vp);
 		vp.setSpacing(10);
-		vp.add(new HTML("<h2>Available Documents</h2>"));
-		documentList.setWidth("100%");
-		vp.add(documentList);
+		HTML html = new HTML("<h2>Available Documents</h2>");
+		vp.add(html);
+		html.setHeight("35px");
 		HorizontalPanel hp = new HorizontalPanel();
 		hp.setSpacing(10);
 		hp.add(refreshList);
 		hp.add(createNew);
 		vp.add(hp);
-		DecoratorPanel dp = new DecoratorPanel();
-		dp.setWidth("100%");
-		dp.add(vp);
-		outerVp_1.add(dp);
+		hp.setWidth("182px");
+		
+		refreshList.addClickHandler(this);
+		createNew.addClickHandler(this);
+		documentList.setSize("500px", "225px");
+		vp.add(documentList);
+		vp.setSize("510px", "300px");
+		
+		documentList.addChangeHandler(this);
+		documentList.setVisibleItemCount(10);
+		
+		outerHp.add(outerVp_1);
+		outerVp_1.setSize("426px", "362px");
+		verticalPanel_1.setStyleName("vp2");
+		verticalPanel_1.setSpacing(10);
+		outerVp_1.add(verticalPanel_1);
+		verticalPanel_1.setWidth("453px");
+		HTML html_2 = new HTML("<h2>Console</h2>");
+		verticalPanel_1.add(html_2);
+		scrollPanel.setStyleName("insideConsole");
+		verticalPanel_1.add(scrollPanel);
+		scrollPanel.setSize("500px", "246px");
+		scrollPanel.setWidget(statusArea);
+		statusArea.setSize("510px", "61px");
+		statusArea.setSpacing(10);
+		verticalPanel.setStyleName("document");
+		verticalPanel.setSpacing(10);
+		HTML html_1 = new HTML("<h2>Selected Documents</h2>");
+		html_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
+		verticalPanel.add(html_1);
+
+		outerHp.add(verticalPanel);
+		verticalPanel.setSize("946px", "691px");
 		hp_1 = new HorizontalPanel();
-		outerVp_1.add(hp_1);
+		hp_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		verticalPanel.add(hp_1);
 		hp_1.setSpacing(10);
 		hp_1.add(refreshDoc);
 		hp_1.add(lockButton);
 		hp_1.add(saveButton);
-		refreshDoc.addClickHandler(this);
-		lockButton.addClickHandler(this);
-		saveButton.addClickHandler(this);
-		
-		outerVp_1.add(tabPanel);
-		tabPanel.setSize("438px", "109px");
+		verticalPanel.add(tabPanel);
+		tabPanel.setSize("918px", "537px");
 		tabPanel.addSelectionHandler(new SelectionHandler<Integer>() 
 		        {
 					@Override
 					public void onSelection(SelectionEvent<Integer> event) {
-						int tabId = event.getSelectedItem();
 						
+						int tabId = event.getSelectedItem();
 						TabContent current = tabDocuments.get(tabId);
+						
+						// Use these variables as place holders to store current 
+						// tab contents. Get current tab contents when a tab is
+						// selected.
 						readOnlyDoc = current.getReadOnlyDoc();
 						lockedDoc = current.getLockedDoc();
 						title = current.getTitle();
@@ -122,100 +159,88 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 						refreshDoc.setEnabled(current.getRefreshDoc());
 						lockButton.setEnabled(current.getLockButton());
 						saveButton.setEnabled(current.getSaveButton());
-
-						System.out.println("tabID: " + tabId + "title: " + title.getValue());
+						
+						// If document is still under editing for the first time,
+						// enable content and title box for editing.
+						if (current.getKey() == null) {
+							title.setEnabled(true);
+							contents.setEnabled(true);
+						}
 					}
 		        });
-		
-		/*
-		TabContent newTab = new TabContent(null, null, true);
-		tabPanel.add(newTab.getVp(), "New tab", false);
-		tabDocuments.add(newTab);
-		tabPanel.selectTab(0); */
-		
-		outerHp.add(outerVp_1);
-		outerVp = new VerticalPanel();
-		outerVp.setSpacing(20);
-		dp = new DecoratorPanel();
-		dp.setWidth("100%");
-		outerVp.add(dp);
-		statusArea.setSpacing(10);
-		statusArea.add(new HTML("<h2>Console</h2>"));
-		statusArea.setSize("100%", "100%");
-		scrollPanel_1.add(statusArea);
-		scrollPanel_1.setHeight("200px");
-		dp.add(scrollPanel_1);
-		outerHp.add(outerVp);
-		
-		scrollPanel_1.addScrollHandler(this);
-		refreshList.addClickHandler(this);
-		createNew.addClickHandler(this);
-		
-		documentList.addChangeHandler(this);
-		documentList.setVisibleItemCount(10);
+		refreshDoc.addClickHandler(this);
+		lockButton.addClickHandler(this);
+		saveButton.addClickHandler(this);
 		
 		setDefaultButtons();
 		initWidget(outerHp);
 		
 		lister.getDocumentList();
 	}
-	protected int setTabWidget(String myKey, String myTitle) {
-		/*
-		VerticalPanel newVP = new VerticalPanel();
-		newVP.setSize("421px", "3cm");
-		newVP.setSpacing(10);
-		newVP.add(new HTML("<h2>Selected Document</h2>"));
-		TextBox t = new TextBox();
-		t.setWidth("100%");
-		newVP.add(t);
-		RichTextArea c = new RichTextArea();
-		c.setWidth("100%");
-		newVP.add(c);
-		tabPanel.add(newVP, result.getTitle());
-		t.setValue(result.getTitle());
-		c.setHTML(result.getContents()); */
-		
-		Boolean open = false;
-		int i;
-		for (i = 0; i < tabDocuments.size(); i++) {
-			String key = tabDocuments.get(i).getKey();
+	
+	/*
+	 * An helper function to figure out the index of the tab based 
+	 * on document key.
+	 */
+	protected int findTabIndex(String myKey) {
+		int tabIndex;
+		for (tabIndex = 0; tabIndex < tabDocuments.size(); tabIndex++) {
+			String key = tabDocuments.get(tabIndex).getKey();
+			
 			if (key != null && key.equals(myKey)) {
-				open = true;
-				break;
+				// If keys are equal, return result
+				return tabIndex;
+			} else if (key == null && myKey == null) {
+				// If they are both null
+				return tabIndex;
 			}
 		}
+		return tabIndex;
+	}
+	
+	/*
+	 * An helper function to open an existing or new tab.
+	 */
+	protected int setTabWidget(String myKey, String myTitle) {
 		
+		// Iterate through tabDocuments to find the tabContents object
+		// that stores all the information about this document.
+		int tabIndex = findTabIndex(myKey);
+		
+		// Get the tab
 		TabContent tab = null;
-		int tabIndex = i;
-		if (!open) {
+		// If it's not open
+		if (tabIndex == tabDocuments.size()) {
+			// Create a new tab and update the tabPanel.
 			tab = new TabContent(null, null);
 			tabDocuments.add(tab);
 			tabPanel.add(tab.getVp(), myTitle);
-			tabIndex = tabDocuments.size() - 1;
-
-			
 		} else {
-			tab = tabDocuments.get(i);
-
+			// Otherwise, get the old tab information.
+			tab = tabDocuments.get(tabIndex);
 		}
 		
+		// Store the attribute of readOnlyDoc and lockedDoc.
 		if (readOnlyDoc == null) {
 			tab.setReadOnlyDoc(null);
 		} else {
 			tab.setReadOnlyDoc(readOnlyDoc.getCopy());
 		}
-		
 		if (lockedDoc == null) {
 			tab.setLockedDoc(null);
 		} else {
 			tab.setLockedDoc(lockedDoc.getCopy());
 		}
+
+		// Make title and contents widget available for edit and display.
 		title = tab.getTitle();
 		contents = tab.getContents();
+		
+		// Set the key attribute
 		tab.setKey(myKey);
 		return tabIndex;
-		
 	}
+	
 	/**
 	 * Resets the state of the buttons and edit objects to their default.
 	 * 
@@ -226,7 +251,6 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		refreshDoc.setEnabled(true);
 		lockButton.setEnabled(true);
 		saveButton.setEnabled(false);
-		// TODO: create a new tab
 		title.setEnabled(false);
 		contents.setEnabled(false);
 	}
@@ -241,6 +265,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 				"Enter the document contents.");
 		locker.gotDoc(lockedDoc);
 		History.newItem("new");
+		createNew.setEnabled(false);
 	}
 	
 	/**
@@ -268,11 +293,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	 */
 	protected void receiveArgs(String args) {
 		if (args.equals("list")) {
-			//readOnlyDoc = null;
-			//lockedDoc = null;
-			//title.setValue("");
-			//contents.setHTML("");
-			//setDefaultButtons();
+			
 		} else if (args.equals("new")) {
 			createNewDocument();
 		} else {
@@ -368,11 +389,5 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 			if (readOnlyDoc.getKey().equals(key)) return;
 			readOnlyDoc = null;
 		}
-	}
-	
-	@Override
-	public void onScroll(ScrollEvent event) {
-		// TODO Auto-generated method stub
-		
 	}
 }

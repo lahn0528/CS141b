@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<moveEntry
+		id="com.google.gdt.eclipse.designer.panels com.google.gwt.user.client.ui.HorizontalPanel"
+		category="com.google.gdt.eclipse.designer.panels"
+		nextEntry="com.google.gdt.eclipse.designer.panels com.google.gwt.user.client.ui.DockLayoutPanel"/>
+</commands>

@@ -1,8 +1,6 @@
 package edu.caltech.cs141b.hw2.gwt.collab.client;
 
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -12,46 +10,44 @@ import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
 public class TabContent {
 	
-	// Track document information.
+	// Store the state of the document and widget for a particular tab.
 	private UnlockedDocument readOnlyDoc;
 	private LockedDocument lockedDoc;
 	private TextBox title;
 	private RichTextArea contents;
-
 	private Boolean refreshDoc;
 	private Boolean lockButton;
 	private Boolean saveButton;
-	private String key;
+	private String key; // Identifier for a tab.
 	private VerticalPanel vp;
 	
 	public TabContent(UnlockedDocument readOnlyDoc, LockedDocument lockedDoc) {
 		super();
 		this.readOnlyDoc = readOnlyDoc;
 		this.lockedDoc = lockedDoc;
-		createWidgetHelper();
 		if (readOnlyDoc != null)
 			key = readOnlyDoc.getKey();
 		else if (lockedDoc != null)
 			key = lockedDoc.getKey();
+		createWidgetHelper();
 	}
 
+	/*
+	 * An helper function to create widget inside of a tab.
+	 */
 	private void createWidgetHelper() {
 		vp = new VerticalPanel();
-		vp.setSize("421px", "3cm");
+		vp.setSize("900px", "0cm");
 		vp.setSpacing(10);
-		vp.add(new HTML("<h2>Selected Document</h2>"));
-		
 		title = new TextBox();
 		title.setWidth("100%");
 		vp.add(title);
 		contents = new RichTextArea();
 		contents.setWidth("100%");
 		vp.add(contents);
-		
-		
 	}
 
-
+	// Getter and Setter Methods of the private variables.
 	public Boolean getRefreshDoc() {
 		return refreshDoc;
 	}
@@ -74,20 +70,6 @@ public class TabContent {
 
 	public void setSaveButton(Boolean saveButton) {
 		this.saveButton = saveButton;
-	}
-
-	public void copyReadOnlyDoc(UnlockedDocument rod) {
-	
-	}
-	public void updateDocs(UnlockedDocument readOnlyDoc, LockedDocument lockedDoc, TextBox title, RichTextArea contents) {
-		this.readOnlyDoc = readOnlyDoc;
-		this.lockedDoc = lockedDoc;
-		if (readOnlyDoc != null)
-			key = readOnlyDoc.getKey();
-		else if (lockedDoc != null)
-			key = lockedDoc.getKey();
-		this.title.setValue(title.getValue());
-		this.contents.setHTML(contents.getHTML());
 	}
 	
 	public String getKey() {

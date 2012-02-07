@@ -1,0 +1,36 @@
+
+h2 {
+	font-color: White;
+	color: White;
+	margin: 4px;
+	font-stretch: narrower;
+	font-variant: small-caps;
+	font-family: Arial;
+	font-weight: 500;
+}
+body{
+	text-align: center;
+	background-image: url("http://fc01.deviantart.net/fs21/f/2007/234/5/e/Ubuntu_Orange_by_PrimoTurbo.jpg");
+}
+#application {
+	margin: 10px;
+}
+.app-title {
+	display: inline;	
+	color: White;
+	margin: 10px;
+	border-top: groove;
+	border-right: double;
+	border-bottom: double;
+	border-left: groove;
+	font-variant: small-caps;
+	font-size: 4em;
+	font-family: sans-serif, @Arial Unicode MS, Californian FB, Arial;
+	text-align: center;
+}
+.app-innerpanel {
+	margin: 0 auto 0 auto;
+	background-color: Red;
+}
+.gwt-Button {
+}
