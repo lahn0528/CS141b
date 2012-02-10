@@ -11919,3 +11919,12 @@ java.lang.NullPointerException
 
 !ENTRY com.google.appengine.eclipse.core 1 0 2012-02-10 00:46:21.391
 !MESSAGE cs141b-hw2 successfully deployed to Google App Engine
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2012-02-10 01:20:57.187
+!MESSAGE cs141b-hw2 successfully deployed to Google App Engine
+
+!ENTRY org.eclipse.ui 4 4 2012-02-10 01:36:02.940
+!MESSAGE Invalid preference page path: CSS Files
+
+!ENTRY com.google.appengine.eclipse.core 1 0 2012-02-10 02:10:32.479
+!MESSAGE cs141b-hw2 successfully deployed to Google App Engine

@@ -127,17 +127,13 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		
 		VerticalPanel welcomePage = new VerticalPanel();
 		welcomePage.setStyleName("welcomePage");
-		HTML welHtml = new HTML("<h2>Welcome to Boba</h2>" +"<p><center>This is a document collaborator! </br>" +
-				"Click on New Document to create a new document page </br>" + "Or choose a document to edit from the Documents list <br></br>" + 
-				"이것은 문서 협력자입니다! </br>" + "새 문서 페이지를 만드는 데 새 문서를 클릭하십시오 </br>" +
-				"또는 문서 목록에서 문서를 선택해서 수정하십시오 <br></br> " +	"这是一个文档的合作者 </br>" + 
-				"点击创建一个新的文档页面 </br>" + "编辑从文件列表中选择一个文件 <br></br>" + "Dies ist ein Dokument Mitarbeiter! </br>" + 
-				"Klicken Sie auf Neues Dokument, um ein neues Dokument zu erstellen </br>" + 
-				"Oder wählen Sie ein Dokument aus der Liste Dokumente bearbeiten <br></br>" +
-				"Il s'agit d'un collaborateur du document! </br>" + "Cliquez sur Nouveau document pour créer une page de document nouvelle</br>" +
-				"Ou choisissez un document à modifier dans la liste des documents</center></p>");
+		HTML welHtml = new HTML("<h2>Welcome to Boba</h2>");
 		welcomePage.add(welHtml);
+		HTML welHtmlContent = new HTML("<p>This is document collaborator! </br>" +
+				"Click New Document button to create a new document page :D</p>");
+		welcomePage.add(welHtmlContent);
 		welHtml.setSize("845px", "800px");
+		welHtmlContent.setSize(width, height)
 		tabPanel.add(welcomePage, "Welcome");
 		welcomePage.setHeight("814px");
 		tabPanel.selectTab(0);
