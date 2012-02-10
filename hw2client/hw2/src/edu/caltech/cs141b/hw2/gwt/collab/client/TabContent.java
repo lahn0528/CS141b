@@ -1,9 +1,11 @@
 package edu.caltech.cs141b.hw2.gwt.collab.client;
 
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RichTextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
@@ -15,9 +17,12 @@ public class TabContent {
 	private LockedDocument lockedDoc;
 	private TextBox title;
 	private RichTextArea contents;
+	
+	// Use boolean value to indicate if the buttons are enabled or not.
 	private Boolean refreshDoc;
 	private Boolean lockButton;
 	private Boolean saveButton;
+	
 	private String key; // Identifier for a tab.
 	private VerticalPanel vp;
 	
@@ -47,11 +52,10 @@ public class TabContent {
 		vp.add(contents);
 	}
 
-	// Getter and Setter Methods of the private variables.
 	public Boolean getRefreshDoc() {
 		return refreshDoc;
 	}
-
+	
 	public void setRefreshDoc(Boolean refreshDoc) {
 		this.refreshDoc = refreshDoc;
 	}

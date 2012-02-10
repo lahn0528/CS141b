@@ -1,13 +1,9 @@
 package edu.caltech.cs141b.hw2.gwt.collab.client;
 
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.VerticalPanel;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.TabPanel;
-import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.TextBox;
 
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
@@ -61,7 +57,7 @@ public class DocReader implements AsyncCallback<UnlockedDocument> {
 		// Store readOnlyDoc and lockedDoc.
 		collaborator.readOnlyDoc = result;
 		collaborator.lockedDoc = null;
-		int tabIndex = collaborator.setTabWidget(result.getKey(), result.getTitle());
+		int tabIndex = collaborator.setTabWidget(result.getKey(), result.getTitle()) + 1;
 		
 		// Edit the tab display.
 		collaborator.title.setValue(result.getTitle());
@@ -70,12 +66,13 @@ public class DocReader implements AsyncCallback<UnlockedDocument> {
 		// Set button status, and store these button status information in 
 		// corresponding tab object.
 		collaborator.setDefaultButtons();
-		collaborator.tabDocuments.get(tabIndex).setRefreshDoc(true);
-		collaborator.tabDocuments.get(tabIndex).setLockButton(true);
-		collaborator.tabDocuments.get(tabIndex).setSaveButton(false);
+		collaborator.tabDocuments.get(tabIndex - 1).setRefreshDoc(true);
+		collaborator.tabDocuments.get(tabIndex - 1).setLockButton(true);
+		collaborator.tabDocuments.get(tabIndex - 1).setSaveButton(false);
 		
 		History.newItem(result.getKey());
 		// Select tab for displaying.
+		collaborator.tabPanel.setTabText(tabIndex, result.getTitle());
 		collaborator.tabPanel.selectTab(tabIndex);
 		
 	}

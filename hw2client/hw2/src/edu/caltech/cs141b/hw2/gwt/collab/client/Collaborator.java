@@ -2,6 +2,8 @@ package edu.caltech.cs141b.hw2.gwt.collab.client;
 
 import java.util.ArrayList;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,29 +13,24 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.RichTextArea;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
-import com.google.gwt.user.client.ui.TabPanel;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
-import com.google.gwt.user.client.ui.VerticalSplitPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
 
 /**
  * Main class for a single Collaborator widget.
  */
 public class Collaborator extends Composite implements ClickHandler, ChangeHandler {
 	
+	Resources resources = GWT.create(Resources.class);
 	protected CollaboratorServiceAsync collabService;
 	
 	// Track document information.
@@ -54,7 +51,8 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	protected Button refreshDoc = new Button("Refresh");
 	protected Button lockButton = new Button("Get Lock");
 	protected Button saveButton = new Button("Save");
-	protected TabPanel tabPanel = new TabPanel();
+	//protected TabLayoutPanel tabPanel = new TabLayoutPanel(3.5, Unit.EM);
+	protected ScrolledTabLayoutPanel tabPanel = new ScrolledTabLayoutPanel(3.5,Unit.EM, resources.leftArrow(),resources.rightArrow());
 	
 	// Callback objects.
 	protected DocLister lister = new DocLister(this);
@@ -67,11 +65,11 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	// Status tracking.
 	private VerticalPanel statusArea = new VerticalPanel();
 	private VerticalPanel vp_1;
-	private HorizontalPanel hp_1;
 	private VerticalPanel outerVp_1;
-	private final VerticalPanel verticalPanel = new VerticalPanel();
-	private final ScrollPanel scrollPanel = new ScrollPanel();
 	private final VerticalPanel verticalPanel_1 = new VerticalPanel();
+	
+	private final HorizontalPanel outerHp;
+	private final Button closeTabButton = new Button("Close Tab");
 	
 	/**
 	 * UI initialization.
@@ -79,123 +77,136 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	 * @param collabService
 	 */
 	public Collaborator(CollaboratorServiceAsync collabService) {
+		refreshList.addStyleName("refresh");
+		createNew.addStyleName("new");
+		lockButton.addStyleName("lock");
+		refreshDoc.addStyleName("refresh");
+		saveButton.addStyleName("save");
+		closeTabButton.addStyleName("close");
 		this.collabService = collabService;
-		HorizontalPanel outerHp = new HorizontalPanel();
+		outerHp = new HorizontalPanel();
 		outerHp.setStyleName("outer-box");
-		outerHp.setSize("100%", "100%");
+		outerHp.setSize("1400px", "900px");
 		outerVp_1 = new VerticalPanel();
-		outerVp_1.setSpacing(20);
-		outerVp_1.setStyleName("outerVp_1");
+		outerVp_1.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		outerVp_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+		outerVp_1.setStyleName("leftPanel");
+		outerVp_1.add(lockButton);
+		lockButton.addClickHandler(this);
+		outerVp_1.add(refreshDoc);
+		refreshDoc.addClickHandler(this);
+		outerVp_1.add(saveButton);
+		saveButton.addClickHandler(this);
+		
+		outerVp_1.add(closeTabButton);
+		closeTabButton.addClickHandler(this);
+		outerVp_1.add(createNew);
+		createNew.addClickHandler(this);
+		outerVp_1.add(refreshList);
+		
+		refreshList.addClickHandler(this);
 		
 		VerticalPanel vp = new VerticalPanel();
 		vp.setStyleName("vp2");
 		outerVp_1.add(vp);
 		vp.setSpacing(10);
-		HTML html = new HTML("<h2>Available Documents</h2>");
+		HTML html = new HTML("<h2>Documents</h2>");
 		vp.add(html);
 		html.setHeight("35px");
-		HorizontalPanel hp = new HorizontalPanel();
-		hp.setSpacing(10);
-		hp.add(refreshList);
-		hp.add(createNew);
-		vp.add(hp);
-		hp.setWidth("182px");
-		
-		refreshList.addClickHandler(this);
-		createNew.addClickHandler(this);
-		documentList.setSize("500px", "225px");
+		documentList.setSize("236px", "393px");
 		vp.add(documentList);
-		vp.setSize("510px", "300px");
+		vp.setSize("185px", "463px");
 		
 		documentList.addChangeHandler(this);
 		documentList.setVisibleItemCount(10);
 		
 		outerHp.add(outerVp_1);
-		outerVp_1.setSize("426px", "362px");
-		verticalPanel_1.setStyleName("vp2");
-		verticalPanel_1.setSpacing(10);
-		outerVp_1.add(verticalPanel_1);
-		verticalPanel_1.setWidth("453px");
-		HTML html_2 = new HTML("<h2>Console</h2>");
-		verticalPanel_1.add(html_2);
-		scrollPanel.setStyleName("insideConsole");
-		verticalPanel_1.add(scrollPanel);
-		scrollPanel.setSize("500px", "246px");
-		scrollPanel.setWidget(statusArea);
-		statusArea.setSize("510px", "61px");
-		statusArea.setSpacing(10);
-		verticalPanel.setStyleName("document");
-		verticalPanel.setSpacing(10);
-		HTML html_1 = new HTML("<h2>Selected Documents</h2>");
-		html_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_LEFT);
-		verticalPanel.add(html_1);
-
-		outerHp.add(verticalPanel);
-		verticalPanel.setSize("946px", "691px");
-		hp_1 = new HorizontalPanel();
-		hp_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		verticalPanel.add(hp_1);
-		hp_1.setSpacing(10);
-		hp_1.add(refreshDoc);
-		hp_1.add(lockButton);
-		hp_1.add(saveButton);
-		verticalPanel.add(tabPanel);
-		tabPanel.setSize("918px", "537px");
+		outerVp_1.setSize("223px", "362px");
+		outerHp.add(tabPanel);
+		tabPanel.setSize("860px", "888px");
+		
+		VerticalPanel welcomePage = new VerticalPanel();
+		welcomePage.setStyleName("welcomePage");
+		HTML welHtml = new HTML("<h2>Welcome to Boba</h2>");
+		welcomePage.add(welHtml);
+		welHtml.setSize("845px", "800px");
+		tabPanel.add(welcomePage, "Welcome");
+		welcomePage.setHeight("814px");
+		tabPanel.selectTab(0);
+		
 		tabPanel.addSelectionHandler(new SelectionHandler<Integer>() 
 		        {
 					@Override
 					public void onSelection(SelectionEvent<Integer> event) {
 						
 						int tabId = event.getSelectedItem();
-						TabContent current = tabDocuments.get(tabId);
-						
-						// Use these variables as place holders to store current 
-						// tab contents. Get current tab contents when a tab is
-						// selected.
-						readOnlyDoc = current.getReadOnlyDoc();
-						lockedDoc = current.getLockedDoc();
-						title = current.getTitle();
-						contents = current.getContents();
-						refreshDoc.setEnabled(current.getRefreshDoc());
-						lockButton.setEnabled(current.getLockButton());
-						saveButton.setEnabled(current.getSaveButton());
-						
-						// If document is still under editing for the first time,
-						// enable content and title box for editing.
-						if (current.getKey() == null) {
-							title.setEnabled(true);
-							contents.setEnabled(true);
+						if (tabId == 0) {
+							refreshDoc.setEnabled(false);
+							lockButton.setEnabled(false);
+							saveButton.setEnabled(false);
+							closeTabButton.setEnabled(false);
+						} else {
+							
+							TabContent current = tabDocuments.get(tabId - 1);
+							
+							// Use these variables as place holders to store current 
+							// tab contents. Get current tab contents when a tab is
+							// selected.
+							readOnlyDoc = current.getReadOnlyDoc();
+							lockedDoc = current.getLockedDoc();
+							title = current.getTitle();
+							contents = current.getContents();
+							refreshDoc.setEnabled(current.getRefreshDoc());
+							lockButton.setEnabled(current.getLockButton());
+							saveButton.setEnabled(current.getSaveButton());
+							
+							// If document is still under editing for the first time,
+							// enable content and title box for editing.
+							if (current.getKey() == null) {
+								title.setEnabled(true);
+								contents.setEnabled(true);
+							}
+							closeTabButton.setEnabled(true);
 						}
+						
+						
 					}
 		        });
-		refreshDoc.addClickHandler(this);
-		lockButton.addClickHandler(this);
-		saveButton.addClickHandler(this);
 		
 		setDefaultButtons();
 		initWidget(outerHp);
+		outerHp.add(verticalPanel_1);
+		verticalPanel_1.setStyleName("rightPanel");
+		verticalPanel_1.setSpacing(10);
+		verticalPanel_1.setSize("348px", "107px");
+		HTML html_2 = new HTML("<h2>Console</h2>");
+		verticalPanel_1.add(html_2);
+		statusArea.setStyleName("insideConsole");
+		verticalPanel_1.add(statusArea);
+		statusArea.setSize("348px", "19px");
+		statusArea.setSpacing(10);
 		
 		lister.getDocumentList();
 	}
 	
 	/*
-	 * An helper function to figure out the index of the tab based 
-	 * on document key.
+	 * An helper function to figure out the index of the document based 
+	 * on document key in the tabPanel.
 	 */
-	protected int findTabIndex(String myKey) {
-		int tabIndex;
-		for (tabIndex = 0; tabIndex < tabDocuments.size(); tabIndex++) {
-			String key = tabDocuments.get(tabIndex).getKey();
+	protected int findDocumentIndex(String myKey) {
+		int docIndex;
+		for (docIndex = 0; docIndex < tabDocuments.size(); docIndex++) {
+			String key = tabDocuments.get(docIndex).getKey();
 			
 			if (key != null && key.equals(myKey)) {
 				// If keys are equal, return result
-				return tabIndex;
+				return docIndex;
 			} else if (key == null && myKey == null) {
 				// If they are both null
-				return tabIndex;
+				return docIndex;
 			}
 		}
-		return tabIndex;
+		return docIndex;
 	}
 	
 	/*
@@ -205,19 +216,22 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		
 		// Iterate through tabDocuments to find the tabContents object
 		// that stores all the information about this document.
-		int tabIndex = findTabIndex(myKey);
+		int docIndex = findDocumentIndex(myKey);
 		
 		// Get the tab
 		TabContent tab = null;
 		// If it's not open
-		if (tabIndex == tabDocuments.size()) {
-			// Create a new tab and update the tabPanel.
+		if (docIndex == tabDocuments.size()) {
+			// Create a new tab
 			tab = new TabContent(null, null);
 			tabDocuments.add(tab);
+			
+			// Update tabPanel
 			tabPanel.add(tab.getVp(), myTitle);
+			
 		} else {
 			// Otherwise, get the old tab information.
-			tab = tabDocuments.get(tabIndex);
+			tab = tabDocuments.get(docIndex);
 		}
 		
 		// Store the attribute of readOnlyDoc and lockedDoc.
@@ -238,7 +252,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		
 		// Set the key attribute
 		tab.setKey(myKey);
-		return tabIndex;
+		return docIndex;
 	}
 	
 	/**
@@ -260,6 +274,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	 */
 	private void createNewDocument() {
 		discardExisting(null);
+		
 		lockedDoc = new LockedDocument(null, null, null,
 				"Enter the document title.",
 				"Enter the document contents.");
@@ -308,7 +323,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	 * @param status the status to add to the console window
 	 */
 	protected void statusUpdate(String status) {
-		while (statusArea.getWidgetCount() > 22) {
+		while (statusArea.getWidgetCount() > 11) {
 			statusArea.remove(1);
 		}
 		final HTML statusUpd = new HTML(status);
@@ -331,15 +346,11 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 				reader.getDocument(readOnlyDoc.getKey());
 			}
 		} else if (event.getSource().equals(lockButton)) {
-			System.out.println("Trying to lock");
 			if (readOnlyDoc != null) {
-				System.out.println("Closer to lock");
 				locker.lockDocument(readOnlyDoc.getKey());
 			}
 		} else if (event.getSource().equals(saveButton)) {
-			System.out.println("Saving step 1");
 			if (lockedDoc != null) {
-				System.out.println("Saving step 2");
 				if (lockedDoc.getTitle().equals(title.getValue()) &&
 						lockedDoc.getContents().equals(contents.getHTML())) {
 					statusUpdate("No document changes; not saving.");
@@ -350,7 +361,34 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 					saver.saveDocument(lockedDoc);
 				}
 			}
-		}
+		} else if (event.getSource().equals(closeTabButton)) {
+			Boolean error = true;
+            String key = null;
+            // Obtain the key for the current document
+            if (readOnlyDoc != null) {
+                key = readOnlyDoc.getKey();
+                error = false;
+            } else if (lockedDoc != null) {
+                key = lockedDoc.getKey();
+                error = false;
+            }
+            
+            // If no error and have at least one tab to close
+            if (!error && tabDocuments.size() > 0) {
+            	// Remove the tab from tab panel, and remove the document from current open document list.
+                int docIndex = findDocumentIndex(key);
+                tabPanel.remove(tabDocuments.get(docIndex).getVp());
+                tabDocuments.remove(docIndex);
+                
+                // show most right side tab
+                // Remember the first page is always welcome
+                tabPanel.selectTab(tabDocuments.size());
+                // If closing off a unsaved new document, enable to create another new one.
+                if (key == null) {
+                    createNew.setEnabled(true);
+                }
+            }
+		} 
 	}
 
 	/* (non-Javadoc)

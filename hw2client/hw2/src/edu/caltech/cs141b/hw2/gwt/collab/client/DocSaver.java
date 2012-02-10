@@ -11,7 +11,7 @@ public class DocSaver implements AsyncCallback<UnlockedDocument> {
 	
 	private Collaborator collaborator;
 	// Index of a tab to save information from.
-	private int tabIndex;
+	private int docIndex;
 	
 	public DocSaver(Collaborator collaborator) {
 		this.collaborator = collaborator;
@@ -20,7 +20,7 @@ public class DocSaver implements AsyncCallback<UnlockedDocument> {
 	public void saveDocument(LockedDocument lockedDoc) {
 		// Find tab index of the locked document.If saving a document for 
 		// the first time, key field is null.
-		tabIndex = collaborator.findTabIndex(lockedDoc.getKey());
+		docIndex = collaborator.findDocumentIndex(lockedDoc.getKey());
 		
 		collaborator.statusUpdate("Attemping to save document.");
 		collaborator.waitingKey = lockedDoc.getKey();
@@ -31,7 +31,7 @@ public class DocSaver implements AsyncCallback<UnlockedDocument> {
 		collaborator.saveButton.setEnabled(false);
 		collaborator.title.setEnabled(false);
 		collaborator.contents.setEnabled(false);
-		collaborator.tabDocuments.get(tabIndex).setSaveButton(false);
+		collaborator.tabDocuments.get(docIndex).setSaveButton(false);
 		
 	}
 
@@ -61,13 +61,12 @@ public class DocSaver implements AsyncCallback<UnlockedDocument> {
 			
 			// If saving a document for the first time, set the key.
 			// Also allow people to create new document again.
-			if (collaborator.tabDocuments.get(tabIndex).getKey() == null) {
+			if (collaborator.tabDocuments.get(docIndex).getKey() == null) {
 				collaborator.createNew.setEnabled(true);
-				collaborator.tabDocuments.get(tabIndex).setKey(result.getKey());
+				collaborator.tabDocuments.get(docIndex).setKey(result.getKey());
 			}
 			// Allow people to rename.
-			collaborator.tabPanel.getTabBar().setTabHTML(tabIndex, result.getTitle());
-			
+			collaborator.tabPanel.setTabText(docIndex + 1, result.getTitle());
 			
 			collaborator.reader.gotDoc(result);
 			// Refresh list in case title was changed.

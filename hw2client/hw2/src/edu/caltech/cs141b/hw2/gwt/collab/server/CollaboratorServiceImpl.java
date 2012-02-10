@@ -20,6 +20,7 @@ import edu.caltech.cs141b.hw2.gwt.collab.server.PMF;
 
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Text;
 import com.google.apphosting.api.DatastorePb.DatastoreService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
@@ -42,7 +43,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		// Instantiate JDO-aware application components
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
-		Query query = pm.newQuery(DocumentJDO.class);
+		Query query = pm.newQuery(Document.class);
 		
 		// Store list of the metadata of the current documents
 		List<DocumentMetadata> docsList = new ArrayList<DocumentMetadata>();
@@ -52,11 +53,12 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 			log.fine("Getting a list of currently available documents");
 			
 			// Get documents from query
-			List<DocumentJDO> results = ((List<DocumentJDO>) query.execute());
+			List<Document> results = ((List<Document>) query.execute());
 			if (!results.isEmpty()) {
 				// Add metadata of each document to docsList
-				for (DocumentJDO d: results) {
-					docsList.add(d.getDocumentMetdataObject());
+				for (Document d: results) {
+					//pm.deletePersistent(d);
+				    	docsList.add(d.getDocumentMetdataObject());
 				}
 			}
 			tx.commit();
@@ -85,7 +87,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
             tx.begin();   
             
             // Get document from datastore with given key
-            DocumentJDO document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(documentKey));
+            Document document = pm.getObjectById(Document.class, KeyFactory.stringToKey(documentKey));
             log.fine("Attemping to lock " + document.getTitle() + ".");
             
             // Mark current date
@@ -130,7 +132,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
             tx.begin();
             
             // Get document with given key and create UnlockedDocument object to return
-            DocumentJDO document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(documentKey));
+            Document document = pm.getObjectById(Document.class, KeyFactory.stringToKey(documentKey));
             unlockedDoc = document.getUnlockedDocumentVersion();
             
             log.fine("Obtaining document: " + document.getTitle() + " for read-only purpose.");
@@ -158,7 +160,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
         Transaction tx = pm.currentTransaction();
         
         UnlockedDocument unlockedDoc;
-        DocumentJDO document;
+        Document document;
         try {
         	// Start transaction
             tx.begin();
@@ -168,7 +170,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
                 log.info("Adding document " + doc.getTitle() + " to persistence manager.");
                 
             	// Create new document and store object in datastore
-            	document = new DocumentJDO(doc.getTitle(), doc.getContents(),
+            	document = new Document(doc.getTitle(), doc.getContents(),
             		doc.getLockedBy(), doc.getLockedUntil());
             	pm.makePersistent(document);
             } else {
@@ -178,7 +180,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
             	Date now = new Date();
             	
             	// Get document from datastore with given key
-            	document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(doc.getKey()));
+            	document = pm.getObjectById(Document.class, KeyFactory.stringToKey(doc.getKey()));
             	
             	// If time has not expired, update document contents. Otherwise, throw exception
             	if (now.before(doc.getLockedUntil())) {
@@ -215,7 +217,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		
-		DocumentJDO document;
+		Document document;
 		try {
 			// Start transaction
 			tx.begin();
@@ -230,7 +232,7 @@ public class CollaboratorServiceImpl extends RemoteServiceServlet implements
 						"document: " + doc.getTitle());
 			} else {
 				// Get document from datastore with given key
-				document = pm.getObjectById(DocumentJDO.class, KeyFactory.stringToKey(doc.getKey()));
+				document = pm.getObjectById(Document.class, KeyFactory.stringToKey(doc.getKey()));
 				document.unlock();
 			}
 			tx.commit();

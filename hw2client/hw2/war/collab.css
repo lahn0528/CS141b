@@ -1,190 +1,168 @@
-* {
-    margin: 0;
-}
-
 h2 {
-	font-color: Grey;
-	color: grey;
-	margin: 4px;
-	font-stretch: narrower;
+	color: orange;
+	margin: 2px;
 	font-variant: small-caps;
-	font-family: Tahoma;
-	font-weight: 500;
+	font-weight:bold;
 }
 
 html, body {
-	text-align: center;
-	background-image: url('images/Orange.jpg');
-	background-size: 100% 125%;
-	height: 100%;
+	background-image: url('images/linen.png');
 }
-.wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto -4em;
-}
-.push{
-	height:4em;
-}
-.footer{
-	color: white;
-	bottom: -50px;
-	width: 102.5%;
-	height: 4em;
-	background: url('images/matte.jpg');
-	background-size: 100% 100%;
-	z-index: 110;
-	border-top-style: solid;
-	border-top-color: orange;
-	border-top-width: 10px;
-}
+
 #application {
-	padding: 110px;
-}
-.app-title {
- 	position: absolute;
- 	z-index:100;
- 	width: 100%;
- 	height: 90px;
-  	top: 0px;
-  	left: 0px;
-	background: url('images/matte.jpg');
-	background-size: 100% 100%;
-	border-bottom-style: solid;
-	border-bottom-color: orange;
-	border-bottom-width: 10px;
-}
-.app-title h1{
-	font: 40px Tahoma;
-	text-align: center;
-  	color: white;
-  	text-shadow: 0px 2px 3px #999;
+	width: 100%;
+	height: 100%;
+	padding-top: 20px;
 }
 
 #loading {
 	position: relative;
-	bottom: -110px;
-	color: white
-}
-}p-innerpanel {
-	margin: 0 auto 0 auto;
-	background-color: Red;
-}
-.gwt-Button {
-	background: url('images/grey.png') no-repeat scroll;
-	background-size: 100% 300%;
+	text-align: center;
 	color: white;
-	border-style:none;
+	font-size: 30px;
+}
+
+.gwt-Button {
+	position: relative;
+	left: -8px;
+	background: transparent;
+	color: #999999;
 	font-family: Helvetica;
-	height: 30px;
-	width: 110px;
+	font-size: 20px;
+	font-weight: bold;
+	text-shadow: 3px 3px black;
+	height: 60px;
+	width: 250px;
+	border-top-style: groove;
+	border-bottom-style: groove;
+	border-right-style: none;
+	border-left-style: none;
+	border-color: #B3B3B3;
+	background-size: 100% 330%;
+	background-position: top;
 }
 .gwt-Button:hover {
-	background-position: center right;
+	cursor: pointer;
+	background-position: center;
     color: white;
     outline: none; /* hide dotted outline in Firefox */
 }
 
-.gwt-Button:active {
-	background-position: bottom right;
-    color: white;
-    outline: none;
-}
-
 .gwt-Button[disabled] {
-  cursor: default;
-  color: white;
-  background: url('images/grey2.png');
-}
-.gwt-Button[disabled]:hover {
+  	cursor: default;
+  	color: #7F7F7F;
+  	text-shadow: none;
+  	background-position: top !important;
 }
 
-.document {
+.gwt-Button:active {
+	cursor: pointer;
+	background-position: bottom;
+}
+.lock {
+	background: url('images/greylock.png') no-repeat scroll;
+}
+.refresh {
+	background: url('images/greyrefresh.png') no-repeat scroll;
+}
+.save {
+	background: url('images/greysave.png') no-repeat scroll;
+}
+.close {
+	background: url('images/greyclose.png') no-repeat scroll;
+}
+.new {
+	background: url('images/greynew.png') no-repeat scroll;
+}
+.leftPanel {
 	position: relative;
-	top: 20px;
-	left: -60px;
-	height: 100%;
-	margin: 0px;
-	background: white;
-	border-top: thin solid Silver;
-	border-right: outset;
-	border-bottom: outset;
-	border-left: ridge;
+	left: 0px;
+	background: None;
+	padding-top: 60px;
 }
 
-
-.gwt-TabBar {
-  	background: #ccc;
-  	padding-top: 6px;
-}
-.gwt-TabBar .gwt-TabBarFirst {
-  	width: 5px;  /* first tab distance from the left */
-}
-.gwt-TabBar .gwt-TabBarRest {
-}
-.gwt-TabBar .gwt-TabBarItem {
-	margin-left: 4px;
-	padding: 4px 8px 4px 8px;
+.gwt-TabLayoutPanelTabInner{
+	margin: 5px 5px -5px 0px;
+	padding: 5px 8px 5px 8px;
 	cursor: pointer;
 	cursor: hand;
 	color: white;
 	font-weight: normal;
 	text-align: center;
 	background: #8E8E8E;
-  	-moz-border-radius: 3px 3px 0px 0px;
-  	border-radius: 3px 3px 0px 0px;
+  	border-radius: 7px 7px 0px 0px;
+    box-shadow: 0 0 20px 3px orange;
 }
-.gwt-TabBar .gwt-TabBarItem-selected {
-	cursor: default;
+
+.gwt-TabLayoutPanelTab:hover .gwt-TabLayoutPanelTabInner{
+	cursor: pointer;
 	background: white;
-	color: #333;
+	color: Black;
+}
+.gwt-TabLayoutPanelTab-selected .gwt-TabLayoutPanelTabInner {
+	background: white;
+	color: Black;
 	font-weight: bold;
-} 
-.gwt-TabBar .gwt-TabBarItem-disabled {
-  	cursor: default;
-  	color: #999999;
 }
-.gwt-TabPanel {
+
+.gwt-TabLayoutPanelContentContainer {
+	margin: 0 10px 20px 10px;
+	background: White;
+    border-radius: 0 0 7px 7px;
+    border: None;
+    padding: 6px;
+    box-shadow: 0 0 20px 3px orange;
 }
-.gwt-TabPanelBottom {
-  border-color: #ccc;
-  border-style: solid;
-  border-width: 0px 1px 1px;
-  overflow: hidden;
-  padding: 6px;
-  height: 100%;
+
+.gwt-TabLayoutPanelTab {
+	left: 10px;
 }
-.gwt-Console {
-	height: 100%;
-	margin: 0px;
-	background: white;
-	border-top: thin solid Silver;
-	border-right: outset;
-	border-bottom: outset;
-	border-left: ridge;
-	z-index: 1;
+
+.gwt-TextBox[disabled] {
+	background: White;
+	color: grey;
 }
-.gwt-RichTextArea {
-	height: 170%;
-}
-.outerVp_1 {
-	position: relative;
-	left: -90px;
+.gwt-TextBox {
+	border: None;
+	text-align: center;
+	font-size: 30px;
 	background: None;
 }
-.vp2 {
-	height: 100%;
+.gwt-RichTextArea {
+	border: None; 
+	width: 800px !important;
+	height: 700px !important;
+}
+
+.gwt-HTML {
+	text-align: left;
+	font-size: 20px;
+	font-family: Lucida Grande;
+}
+.rightPanel {
+	background: None;
+	width: 100%;
 	margin: 0px;
-	background: white;
-	border-top: thin solid Silver;
-	border-right: outset;
-	border-bottom: outset;
-	border-left: ridge;
+	padding: 5px null null;
+	font-family: Lucida Grande;
 }
-.consoleOuterBox {
-	background: white;
-}
+
 .insideConsole {
-	border: thin solid #B0B0B0;
+	text-align: left;
+	font-size: 10px;
+	color: White;
+	border: none;
+	top: 0px;
+}
+.gwt-ListBox {
+	font-family: Lucida Grande;
+}
+.welcomePage {
+	background: #E5E5E5;
+	border-radius: 0 0 7px 7px;
+}
+.welcomePage h2 {
+	text-align: center;
+	font-size: 40px;
+	text-shadow: 2px 2px #CD6600;
 }

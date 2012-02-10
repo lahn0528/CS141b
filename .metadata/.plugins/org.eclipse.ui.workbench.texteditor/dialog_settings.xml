@@ -2,9 +2,9 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="247" key="DIALOG_WIDTH"/>
-		<item value="258" key="DIALOG_Y_ORIGIN"/>
+		<item value="95" key="DIALOG_Y_ORIGIN"/>
 		<item value="358" key="DIALOG_HEIGHT"/>
-		<item value="4" key="DIALOG_X_ORIGIN"/>
+		<item value="981" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Segoe UI|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="contents" key="selection"/>
+		<item value="saveDocument" key="selection"/>
 		<list key="findhistory">
+			<item value="saveDocument"/>
+			<item value="height"/>
+			<item value="22"/>
+			<item value="statusArea"/>
 			<item value="contents"/>
 			<item value="rich"/>
-			<item value="onchange"/>
-			<item value="refreshDo"/>
-			<item value="refresh d"/>
-			<item value="selected"/>
-			<item value="refreshDoc"/>
-			<item value="refresh"/>
+			<item value="lockb"/>
+			<item value="tablayout"/>
 		</list>
 		<list key="replacehistory">
 		</list>
