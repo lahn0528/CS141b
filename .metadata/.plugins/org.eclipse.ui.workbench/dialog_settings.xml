@@ -4,14 +4,14 @@
 		<item value="4" key="DIALOG_Y_ORIGIN"/>
 		<item value="4" key="DIALOG_X_ORIGIN"/>
 	</section>
-	<section name="NewWizardAction">
-	</section>
 	<section name="InstallationDialogSettings">
 		<item value="698" key="DIALOG_WIDTH"/>
 		<item value="-92" key="DIALOG_Y_ORIGIN"/>
-		<item value="-46" key="DIALOG_X_ORIGIN"/>
 		<item value="643" key="DIALOG_HEIGHT"/>
+		<item value="-46" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Segoe UI|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="NewWizardAction">
 	</section>
 	<section name="ImportExportAction">
 		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>

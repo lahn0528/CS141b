@@ -9,6 +9,7 @@ import edu.caltech.cs141b.hw2.gwt.collab.shared.DocumentMetadata;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.LockExpired;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.LockUnavailable;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.LoginResults;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
 /**
@@ -27,44 +28,71 @@ public interface CollaboratorService extends RemoteService {
 	/**
 	 * Used to lock an existing document for editing.
 	 * 
-	 * @param documentKey the key of the document to lock
+	 * @param documentKey : the key of the document to lock
+	 * 		  userKey : the key of the user
 	 * @return a LockedDocument object containing the current document state
-	 *         and the locking primites necessary to save the document
+	 *         and the locking primitives necessary to save the document
 	 * @throws LockUnavailable if a lock cannot be obtained
 	 */
-	LockedDocument lockDocument(String documentKey) throws LockUnavailable;
+	LockedDocument lockDocument(String documentKey, String userKey) throws LockUnavailable;
 	
 	/**
 	 * Used to retrieve a document in read-only mode.
 	 * 
-	 * @param documentKey the key of the documen to read
+	 * @param documentKey : the key of the document to read
+	 * 		  userKey : the key of the user
 	 * @return an UnlockedDocument object which contains the entire document
 	 *         but without any locking primitives
 	 */
-	UnlockedDocument getDocument(String documentKey);
+	UnlockedDocument getDocument(String documentKey, String userKey);
 	
 	/**
 	 * Used to save a currently locked document.
 	 * 
-	 * @param doc the LockedDocument object returned by lockDocument(), with
-	 *         the document properties (but not the locking primitives)
-	 *         potentially modified
+	 * @param doc : the LockedDocument object returned by lockDocument(), with
+	 *         		the document properties (but not the locking primitives) potentially modified
+	 *        userKey : the key of the user
 	 * @return the read-only version of the saved document
 	 * @throws LockExpired if the locking primitives in the supplied
 	 *         LockedDocument object cannot be used to modify the document
 	 */
-	UnlockedDocument saveDocument(LockedDocument doc) throws LockExpired;
+	UnlockedDocument saveDocument(LockedDocument doc, String userKey) throws LockExpired;
 	
 	/**
 	 * Used to release a lock that is no longer needed without saving.
 	 * 
-	 * @param doc the LockedDocument object returned by lockDocument(); any
-	 *         modifications made to the document properties in this case are
-	 *         ignored
+	 * @param doc : the LockedDocument object returned by lockDocument(); any
+	 *         		modifications made to the document properties in this case are ignored
+	 *        userKey : the key of the user
 	 * @throws LockExpired if the locking primitives in the supplied
 	 *         LockedDocument object cannot be used to release the lock
 	 */
-	void releaseLock(LockedDocument doc) throws LockExpired;
+	void releaseLock(LockedDocument doc, String userKey) throws LockExpired;
+	
+	/**
+	 * Used to login a user
+	 * @see edu.caltech.cs141b.hw2.gwt.collab.client.CollaboratorService#login(java.lang.String)
+	 * 
+	 * @param name : String given by user
+	 * @return LoginResults object containing information for user to connect to channel
+	 */
+	LoginResults login(String name);
+	
+	/**
+	 * Used to request a document for editing.
+	 * 
+	 * @param documentKey : the key of the document to request
+	 * 		  userKey : the key of the user
+	 */
+	void request(String documentKey, String userKey);
+	
+	/**
+	 * Used to remove request a document for editing later.
+	 * 
+	 * @param  documentKey : the key of the document to remove request
+	 * 		   userKey : the key of the user
+	 */
+	void cancelRequest(String documentKey, String userKey);
 	
 }
 

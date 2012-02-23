@@ -1,0 +1,535 @@
+package edu.caltech.cs141b.hw2.gwt.collab.client;
+
+import java.util.ArrayList;
+
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.RichTextArea;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
+
+import edu.caltech.cs141b.hw2.gwt.collab.shared.DocumentMessage;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.Message;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.StatusMessage;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+
+/**
+ * Main class for a single Collaborator widget.
+ */
+public class Collaborator extends Composite implements ClickHandler, ChangeHandler {
+	
+	Resources resources = GWT.create(Resources.class);
+	protected CollaboratorServiceAsync collabService;
+	
+	// Track document information.
+	protected UnlockedDocument readOnlyDoc = null;
+	protected LockedDocument lockedDoc = null;
+	
+	// This array list stores tab contents for each tab in the tab panel.
+	protected ArrayList<TabContent> tabDocuments = new ArrayList<TabContent>();
+	
+	// Managing available documents.
+	protected ListBox documentList = new ListBox();
+	private Button refreshList = new Button("Refresh List");
+	protected Button createNew = new Button("New Document");
+	
+	// For displaying document information and editing document content.
+	protected TextBox title = new TextBox();
+	protected RichTextArea contents = new RichTextArea();
+	protected Button refreshDoc = new Button("Refresh");
+	protected Button lockButton = new Button("Get Lock");
+	protected Button saveButton = new Button("Save");
+	protected final Button btnLogin = new Button("Login");
+	private final Button btnRequest = new Button("Request Doc");
+	private final Button btnCancelRequest = new Button("Cancel Request");
+	private final Button closeTabButton = new Button("Close Tab");
+	protected final TextBox loginName = new TextBox();
+	protected ScrolledTabLayoutPanel tabPanel = new ScrolledTabLayoutPanel(3.5,Unit.EM, resources.leftArrow(), resources.rightArrow());
+	
+	// Callback objects.
+	protected DocLister lister = new DocLister(this);
+	protected DocReader reader = new DocReader(this);
+	private DocLocker locker = new DocLocker(this);
+	protected DocReleaser releaser = new DocReleaser(this);
+	protected DocSaver saver = new DocSaver(this);
+	protected DocLogin loginer = new DocLogin(this);
+	private  Request requester = new Request(this);
+	private CancelRequest cancelRequester = new CancelRequest(this);
+	protected String waitingKey = null;
+	
+	// Status tracking.
+	private VerticalPanel statusArea = new VerticalPanel();
+	private VerticalPanel outerVp_1;
+	private final VerticalPanel verticalPanel_1 = new VerticalPanel();
+	private final HorizontalPanel outerHp;
+	
+	// For login purposes
+	protected Boolean alreadyLogin = false;
+	protected String userKey = null;
+	
+	/**
+	 * UI initialization.
+	 * 
+	 * @param collabService
+	 */
+	public Collaborator(CollaboratorServiceAsync collabService) {
+		this.collabService = collabService;
+
+		refreshList.addStyleName("refresh");
+		createNew.addStyleName("new");
+		lockButton.addStyleName("lock");
+		refreshDoc.addStyleName("refresh");
+		saveButton.addStyleName("save");
+		closeTabButton.addStyleName("close");
+		
+		outerHp = new HorizontalPanel();
+		outerHp.setStyleName("outer-box");
+		outerHp.setSize("1400px", "900px");
+		
+		outerVp_1 = new VerticalPanel();
+		outerVp_1.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		outerVp_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
+		outerVp_1.setStyleName("leftPanel");
+		outerVp_1.add(lockButton);
+		lockButton.addClickHandler(this);
+		outerVp_1.add(refreshDoc);
+		refreshDoc.addClickHandler(this);
+		outerVp_1.add(saveButton);
+		saveButton.addClickHandler(this);
+		outerVp_1.add(closeTabButton);
+		closeTabButton.addClickHandler(this);
+		outerVp_1.add(createNew);
+		createNew.addClickHandler(this);
+		outerVp_1.add(refreshList);
+		refreshList.addClickHandler(this);
+		outerVp_1.add(btnLogin);
+		btnLogin.addClickHandler(this);
+		outerVp_1.add(loginName);
+		outerVp_1.add(btnRequest);
+		btnRequest.addClickHandler(this);
+		outerVp_1.add(btnCancelRequest);
+		btnCancelRequest.addClickHandler(this);
+		
+		VerticalPanel vp = new VerticalPanel();
+		vp.setStyleName("vp2");
+		outerVp_1.add(vp);
+		vp.setSpacing(10);
+		HTML html = new HTML("<h2>Documents</h2>");
+		vp.add(html);
+		html.setHeight("35px");
+		documentList.setSize("236px", "393px");
+		vp.add(documentList);
+		vp.setSize("185px", "463px");
+		documentList.addChangeHandler(this);
+		documentList.setVisibleItemCount(10);
+		
+		outerHp.add(outerVp_1);
+		outerVp_1.setSize("223px", "362px");
+		outerHp.add(tabPanel);
+		tabPanel.setSize("860px", "888px");
+		
+		VerticalPanel welcomePage = new VerticalPanel();
+		welcomePage.setStyleName("welcomePage");
+		HTML welHtml = new HTML("<h2>Welcome to Boba</h2>" +"<p><center>This is a document collaborator! </br>" +
+				"Click on New Document to create a new document page </br>" + "Or choose a document to edit from the Documents list <br></br>" + 
+				"이것은 문서 협력자입니다! </br>" + "새 문서 페이지를 만드는 데 새 문서를 클릭하십시오 </br>" +
+				"또는 문서 목록에서 문서를 선택해서 수정하십시오 <br></br> " +	"这是一个文档的合作者 </br>" + 
+				"点击创建一个新的文档页面 </br>" + "编辑从文件列表中选择一个文件 <br></br>" + "Dies ist ein Dokument Mitarbeiter! </br>" + 
+				"Klicken Sie auf Neues Dokument, um ein neues Dokument zu erstellen </br>" + 
+				"Oder wählen Sie ein Dokument aus der Liste Dokumente bearbeiten <br></br>" +
+				"Il s'agit d'un collaborateur du document! </br>" + "Cliquez sur Nouveau document pour créer une page de document nouvelle</br>" +
+				"Ou choisissez un document à modifier dans la liste des documents</center></p>");
+		welcomePage.add(welHtml);
+		welHtml.setSize("845px", "800px");
+		tabPanel.add(welcomePage, "Welcome");
+		welcomePage.setHeight("814px");
+		tabPanel.selectTab(0);
+		
+		tabPanel.addSelectionHandler(new SelectionHandler<Integer>() 
+		        {
+					@Override
+					public void onSelection(SelectionEvent<Integer> event) {
+						
+						int tabId = event.getSelectedItem();
+						if (tabId == 0) {
+							refreshDoc.setEnabled(false);
+							lockButton.setEnabled(false);
+							saveButton.setEnabled(false);
+							closeTabButton.setEnabled(false);
+						} else {
+							
+							TabContent current = tabDocuments.get(tabId - 1);
+							
+							// Use these variables as place holders to store current 
+							// tab contents. Get current tab contents when a tab is selected
+							readOnlyDoc = current.getReadOnlyDoc();
+							lockedDoc = current.getLockedDoc();
+							title = current.getTitle();
+							contents = current.getContents();
+							refreshDoc.setEnabled(current.getRefreshDoc());
+							lockButton.setEnabled(current.getLockButton());
+							saveButton.setEnabled(current.getSaveButton());
+							
+							// If document is still under editing for the first time,
+							// enable content and title box for editing.
+							if (current.getKey() == null) {
+								title.setEnabled(true);
+								contents.setEnabled(true);
+							}
+							closeTabButton.setEnabled(true);
+						}
+					}
+		        });
+		
+		setDefaultButtons();
+		initWidget(outerHp);
+		outerHp.add(verticalPanel_1);
+		verticalPanel_1.setStyleName("rightPanel");
+		verticalPanel_1.setSpacing(10);
+		verticalPanel_1.setSize("348px", "107px");
+		HTML html_2 = new HTML("<h2>Console</h2>");
+		verticalPanel_1.add(html_2);
+		statusArea.setStyleName("insideConsole");
+		verticalPanel_1.add(statusArea);
+		statusArea.setSize("348px", "19px");
+		statusArea.setSpacing(10);
+
+		lister.getDocumentList();
+	}
+	
+	/**
+	 * Find the index of a document in the tabPanel given document key
+	 * 
+	 * @param  myKey : document key
+	 * @return int containing index
+	 */
+	protected int findDocumentIndex(String myKey) {
+		int docIndex;
+		// Iterate through tab, looking for correct document key
+		for (docIndex = 0; docIndex < tabDocuments.size(); docIndex++) {
+			String key = tabDocuments.get(docIndex).getKey();
+			
+			if (key != null && key.equals(myKey)) {
+				// If keys are equal, return result
+				return docIndex;
+			} else if (key == null && myKey == null) {
+				// If they are both null
+				return docIndex;
+			}
+		}
+		return docIndex;
+	}
+	
+	/**
+	 * Open an existing or new tab for a document
+	 * 
+	 * @param  myKey : document key
+	 * 		   myTitle : document title
+	 * @return int containing index
+	 */
+	protected int setTabWidget(String myKey, String myTitle) {
+		// Iterate through tabDocuments to find the tabContents object
+		// that stores all the information about this document.
+		int docIndex = findDocumentIndex(myKey);
+		
+		// Get the tab
+		TabContent tab = null;
+		// If tab for document does not exist, create new tab
+		if (docIndex == tabDocuments.size()) {
+			tab = new TabContent(null, null);
+			tabDocuments.add(tab);
+			
+			// Update tabPanel
+			tabPanel.add(tab.getVp(), myTitle);
+		} else {
+			// Otherwise, get the old tab information.
+			tab = tabDocuments.get(docIndex);
+		}
+		
+		// Store the attribute of readOnlyDoc and lockedDoc.
+		if (readOnlyDoc == null) {
+			tab.setReadOnlyDoc(null);
+		} else {
+			tab.setReadOnlyDoc(readOnlyDoc.getCopy());
+		}
+		if (lockedDoc == null) {
+			tab.setLockedDoc(null);
+		} else {
+			tab.setLockedDoc(lockedDoc.getCopy());
+		}
+
+		// Make title and contents widget available for edit and display.
+		title = tab.getTitle();
+		contents = tab.getContents();
+		
+		// Set the key attribute
+		tab.setKey(myKey);
+		
+		// Return index
+		return docIndex;
+	}
+	
+	/**
+	 * Reset the state of the buttons and edit objects to their default
+	 * 
+	 * The state of each object is modified by requesting or obtaining locks
+	 * and trying to or successfully saving
+	 * 
+	 * @param  None
+	 * @return None
+	 */
+	protected void setDefaultButtons() {
+		refreshDoc.setEnabled(true);
+		lockButton.setEnabled(true);
+		saveButton.setEnabled(false);
+		title.setEnabled(false);
+		contents.setEnabled(false);
+	}
+	
+	/**
+	 * Behaves similarly to locking a document, except without a key/lock obj
+	 * 
+	 * @param  None
+	 * @return None
+	 */
+	private void createNewDocument() {
+		discardExisting(null);
+		
+		// Create new locked document
+		lockedDoc = new LockedDocument(null, null, null,
+				"Enter the document title.",
+				"Enter the document contents.");
+		locker.gotDoc(lockedDoc);
+		History.newItem("new");
+		createNew.setEnabled(false);
+	}
+	
+	/**
+	 * Returns the currently active token
+	 * 
+	 * @param  None
+	 * @return history token which describes the current state
+	 */
+	protected String getToken() {
+		if (lockedDoc != null) {
+			if (lockedDoc.getKey() == null) {
+				return "new";
+			}
+			return lockedDoc.getKey();
+		} else if (readOnlyDoc != null) {
+			return readOnlyDoc.getKey();
+		} else {
+			return "list";
+		}
+	}
+	
+	/**
+	 * Modifies the current state to reflect the supplied token.
+	 * 
+	 * @param args : String containing history token
+	 * @return None
+	 */
+	protected void receiveArgs(String args) {
+		if (args.equals("list")) {
+			
+		} else if (args.equals("new")) {
+			createNewDocument();
+		} else {
+			reader.getDocument(args);
+		}
+	}
+	
+	/**
+	 * Adds status lines to the console window to enable transparency of the
+	 * underlying processes.
+	 * 
+	 * @param status the status to add to the console window
+	 */
+	protected void statusUpdate(String status) {
+		while (statusArea.getWidgetCount() > 11) {
+			statusArea.remove(1);
+		}
+		final HTML statusUpd = new HTML(status);
+		statusArea.add(statusUpd);
+	}
+
+	/* (non-Javadoc)
+	 * Receives button events.
+	 * @see com.google.gwt.event.dom.client.ClickHandler#onClick(com.google.gwt.event.dom.client.ClickEvent)
+	 */
+	@Override
+	public void onClick(ClickEvent event) {
+		if (event.getSource().equals(refreshList)) {
+			History.newItem("list");
+			lister.getDocumentList();
+		} else if (event.getSource().equals(createNew)) {
+			if (alreadyLogin) {
+				createNewDocument();	
+			} else {
+				Window.alert("Please Login first before you are able to create new document.");
+			}
+			
+		} else if (event.getSource().equals(refreshDoc)) {
+			if (readOnlyDoc != null) {
+				reader.getDocument(readOnlyDoc.getKey());
+			}
+		} else if (event.getSource().equals(lockButton)) {
+			if (readOnlyDoc != null) {
+				if (alreadyLogin) {
+					locker.lockDocument(readOnlyDoc.getKey());	
+				} else {
+					Window.alert("Please Login first before you are able to edit the document.");
+				}
+			}
+		} else if (event.getSource().equals(saveButton)) {
+			if (lockedDoc != null) {
+				if (lockedDoc.getTitle().equals(title.getValue()) &&
+						lockedDoc.getContents().equals(contents.getHTML())) {
+					statusUpdate("No document changes; not saving.");
+				}
+				else {
+					lockedDoc.setTitle(title.getValue());
+					lockedDoc.setContents(contents.getHTML());
+					saver.saveDocument(lockedDoc);
+				}
+			}
+		} else if (event.getSource().equals(closeTabButton)) {
+			Boolean error = true;
+            String key = null;
+            // Obtain the key for the current document
+            if (readOnlyDoc != null) {
+                key = readOnlyDoc.getKey();
+                error = false;
+            } else if (lockedDoc != null) {
+                key = lockedDoc.getKey();
+                error = false;
+            }
+            
+            // If no error and have at least one tab to close
+            if (!error && tabDocuments.size() > 0) {
+            	// Remove the tab from tab panel, and remove the document from current open document list.
+                int docIndex = findDocumentIndex(key);
+                tabPanel.remove(tabDocuments.get(docIndex).getVp());
+                tabDocuments.remove(docIndex);
+                
+                // show most right side tab
+                // Remember the first page is always welcome
+                tabPanel.selectTab(tabDocuments.size());
+                // If closing off a unsaved new document, enable to create another new one.
+                if (key == null) {
+                    createNew.setEnabled(true);
+                }
+            }
+		} else if (event.getSource().equals(btnLogin)) {
+			if (! loginName.getValue().equals("")) {
+				System.out.println("Loginname: " + loginName.getValue());
+				loginer.login(loginName.getValue());
+			} 
+		} else if (event.getSource().equals(btnRequest)) {
+			if (readOnlyDoc != null) {
+				if (alreadyLogin) {
+					requester.request(readOnlyDoc.getKey());
+				} else {
+					Window.alert("Please Login first before you are able to edit the document.");
+				}
+			}
+		} else if (event.getSource().equals(btnCancelRequest)) {
+			if (readOnlyDoc != null) {
+				if (alreadyLogin) {
+					cancelRequester.cancelRequest(readOnlyDoc.getKey());
+				} else {
+					Window.alert("Please Login first before you are able to edit the document.");
+				}
+			}
+		}
+	}
+
+	/* (non-Javadoc)
+	 * Intercepts events from the list box.
+	 * @see com.google.gwt.event.dom.client.ChangeHandler#onChange(com.google.gwt.event.dom.client.ChangeEvent)
+	 */
+	@Override
+	public void onChange(ChangeEvent event) {
+		if (event.getSource().equals(documentList)) {
+			String key = documentList.getValue(documentList.getSelectedIndex());
+			discardExisting(key);
+			reader.getDocument(key);
+		}
+	}
+	
+	/**
+	 * Used to release existing locks when the active document changes.
+	 * 
+	 * @param key the key of the new active document or null for a new document
+	 */
+	private void discardExisting(String key) {
+		if (lockedDoc != null) {
+			if (lockedDoc.getKey() == null) {
+				statusUpdate("Discarding new document.");
+			}
+			else if (!lockedDoc.getKey().equals(key)) {
+				releaser.releaseLock(lockedDoc);
+			}
+			else {
+				// Newly active item is the currently locked item.
+				return;
+			}
+			lockedDoc = null;
+			//setDefaultButtons();
+		} else if (readOnlyDoc != null) {
+			if (readOnlyDoc.getKey().equals(key)) return;
+			readOnlyDoc = null;
+		}
+	}
+	
+	public void receiveMsg(Message msg) {
+	    switch (msg.getType()) {
+	      case DOC_KEY:
+	    	  String documentKey = ((DocumentMessage) msg).getDocumentKey();
+	    	  reader.getDocument(documentKey);
+	    	  locker.lockDocument(documentKey);
+	    	  statusUpdate("You are now able to edit the document!");
+	      break;
+
+	      case STATUS_MSG:
+	    	  statusUpdate(((StatusMessage) msg).getStatus());
+	      break;
+	      
+	      default:
+	        Window.alert("Unknown game type: " + msg.getType());
+	    }
+	  }
+	
+	public void receiveMsg(String[] values) {
+		
+		System.out.println("type: " + values[0] + "value: " + values[1]);
+		String type = values[0];
+		 if (type.equals("DOC_KEY")) {
+	    	  reader.getDocument(values[1]);
+	    	  statusUpdate("You are now able to edit " + values[2] + " !");
+	    	  Window.alert("You are now able to edit " + values[2] + " !");
+		 } else if (type.equals("STATUS_MSG")) {
+			 statusUpdate(values[1]);
+			 Window.alert(values[1]);
+		 } else if (type.equals("LOGIN_MSG")) {
+			 statusUpdate(values[1]);
+			 Window.alert(values[1]);
+		 }
+	  }
+}

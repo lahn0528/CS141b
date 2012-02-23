@@ -1,0 +1,251 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329903991895
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903992104
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903992180
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903993394
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903993394
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329903994183
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903994433
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903994593
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903996246
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903996246
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329903997034
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903997326
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903997428
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903998865
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903998865
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329903999455
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903999763
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329903999867
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904001393
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904001393
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329904009001
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904028165
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904034880
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904036972
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904038253
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904039609
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904054344
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904082371
+error,log,,,"Exception occurred in reconcile participant",1329904082372
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904088480
+error,log,,,"Exception occurred in reconcile participant",1329904088481
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904092606
+error,log,,,"Exception occurred in reconcile participant",1329904092608
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904094737
+error,log,,,"Exception occurred in reconcile participant",1329904094738
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904102433
+error,log,,,"Exception occurred in reconcile participant",1329904102434
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904105534
+error,log,,,"Exception occurred in reconcile participant",1329904105535
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904109146
+error,log,,,"Exception occurred in reconcile participant",1329904109147
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904156302
+error,log,,,"Exception occurred in reconcile participant",1329904156304
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904158485
+error,log,,,"Exception occurred in reconcile participant",1329904158486
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904160125
+error,log,,,"Exception occurred in reconcile participant",1329904160127
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904162261
+error,log,,,"Exception occurred in reconcile participant",1329904162263
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1329904410299
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1329904419582
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904421914
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904426270
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904428509
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1329904431703
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904433484
+error,log,,,"Unexpected error while validating Collaborator2.java",1329904434182
+error,log,,,"Unexpected error while validating Collaborator2.java",1329904434811
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904436289
+error,log,,,"Exception occurred in reconcile participant",1329904436290
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904440085
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904440118
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904443002
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904446081
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904446953
+error,log,,,"Exception occurred in reconcile participant",1329904446953
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1329904455333
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904463639
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1329904467611
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904475098
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904488864
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904489047
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904498143
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904499112
+error,log,,,"Exception occurred in reconcile participant",1329904499113
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904502523
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904504646
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904506328
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904508529
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904511004
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904514751
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904516752
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904518772
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904520896
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904522578
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904524603
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904527417
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904529837
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904532416
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904534323
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904538416
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904543522
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904546161
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1329904565168
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1329904572285
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904586429
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904593721
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904595363
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904599293
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904601368
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904605837
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904607670
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1329904610792
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904620304
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904624980
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904625795
+error,log,,,"Exception occurred in reconcile participant",1329904625796
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1329904667990
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904670102
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904675159
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904677109
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1329904681490
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904685468
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904719583
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904729976
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904730927
+error,log,,,"Exception occurred in reconcile participant",1329904730928
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904755544
+error,log,,,"Exception occurred in reconcile participant",1329904755594
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904758220
+error,log,,,"Exception occurred in reconcile participant",1329904758221
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904761848
+error,log,,,"Exception occurred in reconcile participant",1329904761849
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904769012
+error,log,,,"Exception occurred in reconcile participant",1329904769014
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1329904769525
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904771162
+error,log,,,"Exception occurred in reconcile participant",1329904771163
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904775263
+error,log,,,"Exception occurred in reconcile participant",1329904775264
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.copy",1329904782355
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904784129
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1329904787409
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904790035
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904791167
+error,log,,,"Problems occurred when invoking code from plug-in: ""org.eclipse.jdt.core"".",1329904791819
+error,log,,,"Exception occurred in reconcile participant",1329904791820
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904792616
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904795097
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904795206
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329904795207
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329904795815
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904796955
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904798336
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.delete",1329904798344
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329904803153
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904812348
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1329904819279
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1329904820019
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904821919
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329904841773
+executed,command,,,"com.google.gdt.eclipse.suite.launch.ui.webappLaunchShortcut.debug",1329904966751
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904968956
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904980985
+activated,view,com.google.gwt.eclipse.oophm,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.DevModeView",1329904982163
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329904983377
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905069114
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329905071372
+executed,command,,,"com.google.gdt.eclipse.suite.launch.ui.webappLaunchShortcut.run",1329905075442
+activated,view,com.google.gwt.eclipse.oophm,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.DevModeView",1329905075675
+activated,view,org.eclipse.ui.console,3.5.100.v20110511,"org.eclipse.ui.console.ConsoleView",1329905077263
+activated,view,com.google.gwt.eclipse.oophm,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.DevModeView",1329905079909
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905082227
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905101723
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329905102152
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905104948
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905105739
+executed,command,com.google.appengine.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.appengine.eclipse.core.deployToGoogle",1329905106058
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905106071
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905160084
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905178300
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905178509
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905352841
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905353678
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905417158
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905832311
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905832716
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905832798
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905833799
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905954181
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329905956275
+opened,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1329905963407
+activated,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1329905963783
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329905967442
+opened,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329905967905
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329905968067
+closed,editor,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.CompilationUnitEditor",1329905982084
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329905984219
+closed,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329905984220
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329905986671
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906052957
+activated,view,org.eclipse.mylyn.tasks.ui,3.6.0.v20110608-1400,"org.eclipse.mylyn.tasks.ui.views.tasks",1329906053196
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329906054084
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906119215
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906127369
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906211146
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906303614
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906363412
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.findReplace",1329906363451
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906370223
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906371177
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906373304
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329906392736
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906395943
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906396156
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329906404825
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906404825
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329906411774
+activated,view,org.eclipse.ui.ide,3.7.0.I20110519-0100,"org.eclipse.ui.views.ProblemView",1329906415119
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329906416708
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906424687
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906424862
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329906437211
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906437212
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.undo",1329906440534
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329906441363
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329906458355
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906458588
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906458680
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329906479498
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906479809
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906479985
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906481772
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329906491668
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906491668
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329906494046
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906494674
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906494850
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329906516400
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906516732
+activated,view,org.eclipse.jdt.ui,3.7.0.v20110531-1200,"org.eclipse.jdt.ui.PackageExplorer",1329906541944
+opened,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906542792
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906542970
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906556462
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906558415
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906558415
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906559120
+activated,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906560721
+closed,editor,com.google.gwt.eclipse.core,2.5.1.v201201120043-rel-r37,"com.google.gwt.eclipse.core.editors.gwtJavaEditor",1329906560721
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329906561930
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906661076
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906687370
+activated,view,org.eclipse.mylyn.tasks.ui,3.6.0.v20110608-1400,"org.eclipse.mylyn.tasks.ui.views.tasks",1329906687408
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329906726425
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.edit.paste",1329906733974
+executed,command,org.eclipse.ui,3.7.0.I20110602-0100,"org.eclipse.ui.file.save",1329906735150
+deactivated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906760033
+activated,workbench,org.eclipse.ui.workbench,3.7.0.I20110519-0100,"",1329906767381
+activated,view,org.eclipse.mylyn.tasks.ui,3.6.0.v20110608-1400,"org.eclipse.mylyn.tasks.ui.views.tasks",1329906767410
+activated,editor,org.eclipse.wb.core.ui,,"org.eclipse.wb.core.guiEditor",1329906768452

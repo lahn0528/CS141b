@@ -21,7 +21,7 @@ public class DocReader implements AsyncCallback<UnlockedDocument> {
 	public void getDocument(String key) {
 		collaborator.statusUpdate("Fetching document " + key + ".");
 		collaborator.waitingKey = key;
-		collaborator.collabService.getDocument(key, this);
+		collaborator.collabService.getDocument(key, collaborator.userKey, this);
 	}
 
 	@Override

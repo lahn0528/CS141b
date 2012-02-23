@@ -20,7 +20,7 @@ public class DocLocker implements AsyncCallback<LockedDocument> {
 	public void lockDocument(String key) {
 		collaborator.statusUpdate("Attempting to lock document.");
 		collaborator.waitingKey = key;
-		collaborator.collabService.lockDocument(key, this);
+		collaborator.collabService.lockDocument(key, collaborator.userKey, this);
 		collaborator.lockButton.setEnabled(false);
 	}
 
@@ -74,6 +74,7 @@ public class DocLocker implements AsyncCallback<LockedDocument> {
 		collaborator.refreshDoc.setEnabled(false);
 		collaborator.lockButton.setEnabled(false);
 		collaborator.saveButton.setEnabled(true);
+		
 		TabContent current = collaborator.tabDocuments.get(tabIndex - 1);
 		current.setRefreshDoc(false);
 		current.setLockButton(false);

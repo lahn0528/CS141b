@@ -1,0 +1,35 @@
+package edu.caltech.cs141b.hw2.gwt.collab.client.channel;
+
+import edu.caltech.cs141b.hw2.gwt.collab.client.channel.Socket;
+import edu.caltech.cs141b.hw2.gwt.collab.client.channel.SocketListener;
+import com.google.gwt.core.client.JavaScriptObject;
+
+/** Represents a channel to receive messages from the server. */
+public class Channel extends JavaScriptObject {
+  protected Channel() {
+  }
+
+  /** Opens the channel and attaches the given listener. */
+  public final native Socket open(SocketListener listener) /*-{
+    var socket = this.open();
+    socket.onopen = function(event) {
+      listener.@edu.caltech.cs141b.hw2.gwt.collab.client.channel.SocketListener::onOpen()();
+    };
+    socket.onmessage = function(event) {
+      listener.
+      @edu.caltech.cs141b.hw2.gwt.collab.client.channel.SocketListener::onMessage(Ljava/lang/String;)
+      (event.data);
+    };
+    socket.onerror = function(error) {
+      listener.
+      @edu.caltech.cs141b.hw2.gwt.collab.client.channel.SocketListener::onError(Ledu/caltech/cs141b/hw2/gwt/collab/client/channel/SocketError;)
+      (error);
+    };
+    socket.onclose = function(event) {
+      listener.
+      @edu.caltech.cs141b.hw2.gwt.collab.client.channel.SocketListener::onClose()();
+    };
+    return socket;
+  }-*/;
+}
+

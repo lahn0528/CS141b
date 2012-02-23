@@ -1,0 +1,34 @@
+package edu.caltech.cs141b.hw2.gwt.collab.client;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+/**
+ * Used in conjunction with <code>CollaboratorService.request()</code>.
+ */
+public class Request implements AsyncCallback<Void> {
+	
+	private Collaborator collaborator;
+	
+	public Request(Collaborator collaborator) {
+		this.collaborator = collaborator;
+	}
+	
+	public void request(String key) {
+		collaborator.statusUpdate("Requesting document " + key + ".");
+		collaborator.waitingKey = key;
+		collaborator.collabService.request(key, collaborator.userKey, this);
+	}
+
+	@Override
+	public void onFailure(Throwable caught) {
+		collaborator.statusUpdate("Error requesting document"
+				+ "; caught exception " + caught.getClass()
+				+ " with message: " + caught.getMessage());
+		GWT.log("Error requesting document.", caught);		
+	}
+
+	@Override
+	public void onSuccess(Void result) {
+		collaborator.statusUpdate("Document requested.");
+	}
+}

@@ -6,6 +6,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 import edu.caltech.cs141b.hw2.gwt.collab.shared.DocumentMetadata;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.LockedDocument;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.LoginResults;
 import edu.caltech.cs141b.hw2.gwt.collab.shared.UnlockedDocument;
 
 /**
@@ -15,16 +16,22 @@ public interface CollaboratorServiceAsync {
 
 	void getDocumentList(AsyncCallback<List<DocumentMetadata>> callback);
 
-	void lockDocument(String documentKey,
+	void lockDocument(String documentKey, String userKey,
 			AsyncCallback<LockedDocument> callback);
 
-	void getDocument(String documentKey,
+	void getDocument(String documentKey, String userKey,
 			AsyncCallback<UnlockedDocument> callback);
 
-	void saveDocument(LockedDocument doc,
+	void saveDocument(LockedDocument doc, String userKey,
 			AsyncCallback<UnlockedDocument> callback);
 
-	void releaseLock(LockedDocument doc, AsyncCallback<Void> callback);
+	void releaseLock(LockedDocument doc, String userKey, AsyncCallback<Void> callback);
+	
+	void login(String name, AsyncCallback<LoginResults> callback);
+	
+	void request(String documentKey, String userKey, AsyncCallback<Void> callback);
+	
+	void cancelRequest(String documentKey, String userKey, AsyncCallback<Void> callback);
 
 }
 

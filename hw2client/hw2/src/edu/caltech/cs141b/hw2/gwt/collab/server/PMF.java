@@ -15,7 +15,6 @@ public class PMF {
 	/**
 	 * Used to return a PersistenceManagerFactory instance
 	 * 
-	 * @param None
 	 * @return pmfInstance : PersistenceManagerFactory instance
 	 */
 	public static PersistenceManagerFactory get() {

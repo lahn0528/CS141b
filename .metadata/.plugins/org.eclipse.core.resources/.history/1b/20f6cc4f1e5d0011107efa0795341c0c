@@ -1,0 +1,38 @@
+package edu.caltech.cs141b.hw2.gwt.collab.shared;
+import edu.caltech.cs141b.hw2.gwt.collab.shared.Message.Type;
+
+public class DocumentMessage extends Message {
+	private String user;
+	private String documentKey;
+	private String documentTitle;
+	
+	@SuppressWarnings({"UnusedDeclaration"})
+	// For GWT RPC
+	private DocumentMessage() {
+		super(Type.DOC_KEY);
+	}
+	
+	public DocumentMessage(String user, String documentKey, String documentTitle) {
+		super(Type.DOC_KEY);
+		this.user = user;
+		this.documentKey = documentKey;
+		this.documentTitle = documentTitle;
+	}
+
+	public String getUser() {
+		return user;
+	}
+	
+	public String getDocumentKey() {
+		return documentKey;
+	}
+	
+	public String getDocumentTitle() {
+		return documentTitle;
+	}
+  
+	public String toString() {
+		return "DOC_KEY/" + documentKey + "/" + documentTitle;
+		
+	}
+}

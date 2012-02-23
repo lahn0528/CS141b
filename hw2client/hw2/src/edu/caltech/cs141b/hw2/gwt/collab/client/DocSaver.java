@@ -18,13 +18,13 @@ public class DocSaver implements AsyncCallback<UnlockedDocument> {
 	}
 	
 	public void saveDocument(LockedDocument lockedDoc) {
-		// Find tab index of the locked document.If saving a document for 
+		// Find tab index of the locked document. If saving a document for 
 		// the first time, key field is null.
 		docIndex = collaborator.findDocumentIndex(lockedDoc.getKey());
 		
-		collaborator.statusUpdate("Attemping to save document.");
+		collaborator.statusUpdate("Attempting to save document.");
 		collaborator.waitingKey = lockedDoc.getKey();
-		collaborator.collabService.saveDocument(lockedDoc, this);
+		collaborator.collabService.saveDocument(lockedDoc, collaborator.userKey, this);
 		
 		// Set button status, and store these button status information in 
 		// corresponding tab object.
@@ -78,4 +78,3 @@ public class DocSaver implements AsyncCallback<UnlockedDocument> {
 	}
 	
 }
-

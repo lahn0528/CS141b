@@ -18,8 +18,6 @@ import com.google.gwt.user.client.ui.*;
  */
 public class ScrolledTabLayoutPanel extends TabLayoutPanel {
 
-	private static final int IMAGE_PADDING_PIXELS = 4;
-
 	private LayoutPanel panel;
 	private FlowPanel tabBar;
 	private Image scrollLeftButton;

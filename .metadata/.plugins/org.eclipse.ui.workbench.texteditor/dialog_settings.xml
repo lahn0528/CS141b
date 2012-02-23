@@ -13,18 +13,20 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="saveDocument" key="selection"/>
+		<item value="createC" key="selection"/>
 		<list key="findhistory">
-			<item value="saveDocument"/>
-			<item value="height"/>
-			<item value="22"/>
-			<item value="statusArea"/>
-			<item value="contents"/>
-			<item value="rich"/>
-			<item value="lockb"/>
-			<item value="tablayout"/>
+			<item value="createC"/>
+			<item value="login"/>
+			<item value="statusU"/>
+			<item value="status"/>
+			<item value="receiveMs"/>
+			<item value="System.out.println"/>
+			<item value="getLockedBy"/>
+			<item value="welcom"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Document"/>
+			<item value="JDODocument"/>
 		</list>
 	</section>
 </section>

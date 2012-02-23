@@ -4,8 +4,8 @@
 <res path="leftarrow.png"/>
 <res path="edu/caltech/cs141b/hw2/gwt/collab/client/close_button.png"/>
 <res path="edu/caltech/cs141b/hw2/gwt/collab/client/rightarrow.png"/>
-<res path="close_button.png"/>
 <res path="rightarrow.png"/>
+<res path="close_button.png"/>
 <res path="edu/caltech/cs141b/hw2/gwt/collab/client/leftarrow.png"/>
 </deps>
 </index>
