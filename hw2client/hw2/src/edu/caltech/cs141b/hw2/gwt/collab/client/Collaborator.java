@@ -1,7 +1,6 @@
 package edu.caltech.cs141b.hw2.gwt.collab.client;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -46,7 +45,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	
 	// Managing available documents.
 	protected ListBox documentList = new ListBox();
-	private Button refreshList = new Button("Refresh List");
+	private Button refreshList = new Button("Refresh  List");
 	protected Button createNew = new Button("New Document");
 	
 	// For displaying document information and editing document content.
@@ -56,12 +55,12 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	protected Button lockButton = new Button("Get Lock");
 	protected Button saveButton = new Button("Save");
 	protected final Button btnLogin = new Button("Login");
-	protected final Button btnRequest = new Button("Request Doc");
-	protected final Button btnCancelRequest = new Button("Cancel Request");
+	private final Button btnRequest = new Button("Request Doc");
+	private final Button btnCancelRequest = new Button("Cancel Request");
 	private final Button closeTabButton = new Button("Close Tab");
 	private final ToggleButton tglbtnSimulate = new ToggleButton("Simulate", "Cancel");
 	protected final TextBox loginName = new TextBox();
-	protected ScrolledTabLayoutPanel tabPanel = new ScrolledTabLayoutPanel(3.5,Unit.EM, resources.leftArrow(), resources.rightArrow());
+	protected ScrolledTabLayoutPanel tabPanel = new ScrolledTabLayoutPanel(3.5,Unit.EM, resources.leftArrow(),resources.rightArrow());
 	
 	// Callback objects.
 	protected DocLister lister = new DocLister(this);
@@ -80,15 +79,22 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	private final VerticalPanel verticalPanel_1 = new VerticalPanel();
 	private final HorizontalPanel outerHp;
 	
-	// For login purposes
 	protected Boolean alreadyLogin = false;
 	protected String userKey = null;
 	
 	// Timer
 	private Timer timer = null;
-	private Boolean timerRunning = false;
-	private Random randomGenerator = new Random();
-	private Boolean simHasToken = false;
+	protected boolean isSimulate = false;
+	private int simulateCounter = 0;
+	private final int NUM_OF_ITERATION = 3;
+	
+	// Set
+	private final int THINKING_TIME = 5000;
+	private final int HUNGRY_TIME = 5000;
+	private final int EATING_TIME = 5000;
+	// Please don't change server process time because it indicates 
+	// the time for the server to complete its calls.
+	private final int SERVER_PROCESS_TIME = 5000;
 	
 	/**
 	 * UI initialization.
@@ -96,23 +102,21 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	 * @param collabService
 	 */
 	public Collaborator(CollaboratorServiceAsync collabService) {
-		this.collabService = collabService;
-
 		refreshList.addStyleName("refresh");
 		createNew.addStyleName("new");
 		lockButton.addStyleName("lock");
 		refreshDoc.addStyleName("refresh");
 		saveButton.addStyleName("save");
 		closeTabButton.addStyleName("close");
-		
+		this.collabService = collabService;
 		outerHp = new HorizontalPanel();
 		outerHp.setStyleName("outer-box");
 		outerHp.setSize("1400px", "900px");
-		
 		outerVp_1 = new VerticalPanel();
 		outerVp_1.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		outerVp_1.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
 		outerVp_1.setStyleName("leftPanel");
+		
 		outerVp_1.add(lockButton);
 		lockButton.addClickHandler(this);
 		outerVp_1.add(refreshDoc);
@@ -135,6 +139,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		tglbtnSimulate.setStyleName("gwt-Button");
 		outerVp_1.add(tglbtnSimulate);
 		outerVp_1.setCellHorizontalAlignment(tglbtnSimulate, HasHorizontalAlignment.ALIGN_CENTER);
+		tglbtnSimulate.setSize("255", "60");
 		tglbtnSimulate.addClickHandler(this);
 		
 		VerticalPanel vp = new VerticalPanel();
@@ -147,6 +152,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		documentList.setSize("236px", "393px");
 		vp.add(documentList);
 		vp.setSize("185px", "463px");
+		
 		documentList.addChangeHandler(this);
 		documentList.setVisibleItemCount(10);
 		
@@ -173,7 +179,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		tabPanel.selectTab(0);
 		
 		tabPanel.addSelectionHandler(new SelectionHandler<Integer>() 
-		        {
+				{
 					@Override
 					public void onSelection(SelectionEvent<Integer> event) {
 						
@@ -188,7 +194,8 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 							TabContent current = tabDocuments.get(tabId - 1);
 							
 							// Use these variables as place holders to store current 
-							// tab contents. Get current tab contents when a tab is selected
+							// tab contents. Get current tab contents when a tab is
+							// selected.
 							readOnlyDoc = current.getReadOnlyDoc();
 							lockedDoc = current.getLockedDoc();
 							title = current.getTitle();
@@ -205,6 +212,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 							}
 							closeTabButton.setEnabled(true);
 						}
+											
 					}
 		        });
 		
@@ -225,14 +233,13 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	}
 	
 	/**
-	 * Find the index of a document in the tabPanel given document key
+	 * Find the index of a document
 	 * 
-	 * @param  myKey : document key
-	 * @return int containing index
+	 * @param  myKey : the key of the document to find
+	 * @return int containing index of document if found
 	 */
 	protected int findDocumentIndex(String myKey) {
 		int docIndex;
-		// Iterate through tab, looking for correct document key
 		for (docIndex = 0; docIndex < tabDocuments.size(); docIndex++) {
 			String key = tabDocuments.get(docIndex).getKey();
 			
@@ -248,26 +255,32 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	}
 	
 	/**
-	 * Open an existing or new tab for a document
+	 * Open existing or new tab
 	 * 
-	 * @param  myKey : document key
-	 * 		   myTitle : document title
-	 * @return int containing index
+	 * @param  myKey : key of document
+	 * 		   myTitle: title of document
+	 * @return int containing index of document
+	 */
+	/*
+	 * An helper function to open an existing or new tab.
 	 */
 	protected int setTabWidget(String myKey, String myTitle) {
+		
 		// Iterate through tabDocuments to find the tabContents object
 		// that stores all the information about this document.
 		int docIndex = findDocumentIndex(myKey);
 		
 		// Get the tab
 		TabContent tab = null;
-		// If tab for document does not exist, create new tab
+		// If it's not open
 		if (docIndex == tabDocuments.size()) {
+			// Create a new tab
 			tab = new TabContent(null, null);
 			tabDocuments.add(tab);
 			
 			// Update tabPanel
 			tabPanel.add(tab.getVp(), myTitle);
+			
 		} else {
 			// Otherwise, get the old tab information.
 			tab = tabDocuments.get(docIndex);
@@ -291,16 +304,14 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 		
 		// Set the key attribute
 		tab.setKey(myKey);
-		
-		// Return index
 		return docIndex;
 	}
 	
 	/**
-	 * Reset the state of the buttons and edit objects to their default
+	 * Resets the state of the buttons and edit objects to their default.
 	 * 
-	 * The state of each object is modified by requesting or obtaining locks
-	 * and trying to or successfully saving
+	 * The state of these objects is modified by requesting or obtaining locks
+	 * and trying to or successfully saving.
 	 */
 	protected void setDefaultButtons() {
 		refreshDoc.setEnabled(true);
@@ -311,12 +322,11 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	}
 	
 	/**
-	 * Behaves similarly to locking a document, except without a key/lock object
+	 * Behaves similarly to locking a document, except without a key/lock obj.
 	 */
 	private void createNewDocument() {
 		discardExisting(null);
 		
-		// Create new locked document
 		lockedDoc = new LockedDocument(null, null, null,
 				"Enter the document title.",
 				"Enter the document contents.");
@@ -326,7 +336,7 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	}
 	
 	/**
-	 * Returns the currently active token
+	 * Returns the currently active token.
 	 * 
 	 * @return history token which describes the current state
 	 */
@@ -346,17 +356,14 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	/**
 	 * Modifies the current state to reflect the supplied token.
 	 * 
-	 * @param args : String containing history token
+	 * @param args history token received
 	 */
 	protected void receiveArgs(String args) {
-		// If args = "list", do nothing
 		if (args.equals("list")) {
 			
 		} else if (args.equals("new")) {
-			// If args = "new", create new document
 			createNewDocument();
 		} else {
-			// Else, args must be a key. Get document
 			reader.getDocument(args);
 		}
 	}
@@ -365,10 +372,9 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	 * Adds status lines to the console window to enable transparency of the
 	 * underlying processes.
 	 * 
-	 * @param status : the status to add to the console window
+	 * @param status : status to add to the console window
 	 */
 	protected void statusUpdate(String status) {
-		// Limit console window to 11 lines
 		while (statusArea.getWidgetCount() > 11) {
 			statusArea.remove(1);
 		}
@@ -383,32 +389,28 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	@Override
 	public void onClick(ClickEvent event) {
 		if (event.getSource().equals(refreshList)) {
-			// Get document list
 			History.newItem("list");
 			lister.getDocumentList();
 		} else if (event.getSource().equals(createNew)) {
-			// Create new document only if user has already logged in
 			if (alreadyLogin) {
 				createNewDocument();	
 			} else {
-				Window.alert("Please Login first before you try to create a new document.");
+				Window.alert("Please Login first before you are able to create new document.");
 			}
+			
 		} else if (event.getSource().equals(refreshDoc)) {
-			// Refresh document
 			if (readOnlyDoc != null) {
 				reader.getDocument(readOnlyDoc.getKey());
 			}
 		} else if (event.getSource().equals(lockButton)) {
-			// Lock document only if user has already logged in
 			if (readOnlyDoc != null) {
 				if (alreadyLogin) {
 					locker.lockDocument(readOnlyDoc.getKey());	
 				} else {
-					Window.alert("Please Login first before you try to edit a document.");
+					Window.alert("Please Login first before you are able to edit the document.");
 				}
 			}
 		} else if (event.getSource().equals(saveButton)) {
-			// Save document only if changes have been made
 			if (lockedDoc != null) {
 				if (lockedDoc.getTitle().equals(title.getValue()) &&
 						lockedDoc.getContents().equals(contents.getHTML())) {
@@ -421,10 +423,8 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 				}
 			}
 		} else if (event.getSource().equals(closeTabButton)) {
-			// Close current tab
 			Boolean error = true;
             String key = null;
-            
             // Obtain the key for the current document
             if (readOnlyDoc != null) {
                 key = readOnlyDoc.getKey();
@@ -434,64 +434,50 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
                 error = false;
             }
             
-            // If there is no error and at least one tab is open
+            // If no error and have at least one tab to close
             if (!error && tabDocuments.size() > 0) {
-            	// Remove the tab from tab panel, and remove the document from current opened document list.
+            	// Remove the tab from tab panel, and remove the document from current open document list.
                 int docIndex = findDocumentIndex(key);
                 tabPanel.remove(tabDocuments.get(docIndex).getVp());
                 tabDocuments.remove(docIndex);
                 
-                // show rightmost tab
+                // show most right side tab
                 // Remember the first page is always welcome
                 tabPanel.selectTab(tabDocuments.size());
-                
-                // If closing an unsaved new document, enable Create New button
+                // If closing off a unsaved new document, enable to create another new one.
                 if (key == null) {
                     createNew.setEnabled(true);
                 }
             }
 		} else if (event.getSource().equals(btnLogin)) {
-			// Log user if given valid text (not empty)
-			if (!loginName.getValue().equals("")) {
+			if (! loginName.getValue().equals("")) {
 				System.out.println("Loginname: " + loginName.getValue());
 				loginer.login(loginName.getValue());
 			} 
 		} else if (event.getSource().equals(btnRequest)) {
-			// Request document only if user has already logged in
 			if (readOnlyDoc != null) {
 				if (alreadyLogin) {
 					requester.request(readOnlyDoc.getKey());
 				} else {
-					Window.alert("Please Login first before you try to edit a document.");
+					Window.alert("Please Login first before you are able to edit the document.");
 				}
 			}
 		} else if (event.getSource().equals(btnCancelRequest)) {
-			// Cancel request for document only if user has already logged in
 			if (readOnlyDoc != null) {
 				if (alreadyLogin) {
 					cancelRequester.cancelRequest(readOnlyDoc.getKey());
 				} else {
-					Window.alert("Please Login first before you try to edit a document.");
+					Window.alert("Please Login first before you are able to edit the document.");
 				}
 			}
-		} else if (event.getSource().equals(tglbtnSimulate)) {
+		} else if (event.getSource().equals(tglbtnSimulate)) {			
 			if (tglbtnSimulate.isDown()) {
-				if (timer != null) {
-					Window.alert("Timer is already running!");
-			    } else {		
-			    	Window.alert("Starting Timer");
-					timerRunning = true;  				
-
-					//while (timerRunning) {
-						Window.alert("Starting thinking");
-						thinkingState();
-						Window.alert("Done thinking..Now requesting token!");
-						hungryState();
-					//}
-				}
-				// Schedule the timer to run once in 5 seconds.
+				// Simulate button
+				isSimulate = true;
+				thinkingState();
 	        } else {
-				cancelTimer();
+	        	// Cancel button
+				cancelTimer(timer);
 				Window.alert("Simulation has been canceled.");	   
 	        }
 		}
@@ -511,9 +497,9 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	}
 	
 	/**
-	 * Release existing locks when the active document changes.
+	 * Used to release existing locks when the active document changes.
 	 * 
-	 * @param key : key of the new active document or null for a new document
+	 * @param key the key of the new active document or null for a new document
 	 */
 	private void discardExisting(String key) {
 		if (lockedDoc != null) {
@@ -536,38 +522,46 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 	}
 	
 	/**
-	 * Send correct status to console based on String[]
+	 * Update status based on message received
 	 * 
-	 * @param values : String[] object containing messages to be sent
+	 * @param  values : String[] containing message to update
 	 */
 	public void receiveMsg(String[] values) {
-		
 		System.out.println("type: " + values[0] + "value: " + values[1]);
 		String type = values[0];
 		 if (type.equals("DOC_KEY")) {
 	    	  reader.getDocument(values[1]);
-	    	  
-	    	  if (timerRunning && values[1].equals(documentList.getValue(0))) {
-	    		  simHasToken = true;
+	    	  statusUpdate("You are now able to edit " + values[2] + " !");
+	    	  // Check if this document key is for simulation
+	    	  if (!isSimulate) {
+	    		  Window.alert("You are now able to edit " + values[2] + " !");
 	    	  } else {
-	    		  statusUpdate("You now have one minute to lock and edit " + values[2] + " !");
-	    		  Window.alert("You now have one minute to lock and edit " + values[2] + " !");
+		    	  lockingState();
 	    	  }
 		 } else if (type.equals("STATUS_MSG")) {
 			 statusUpdate(values[1]);
-			 Window.alert(values[1]);
+			 if (!isSimulate)
+				 Window.alert(values[1]);
 		 } else if (type.equals("LOGIN_MSG")) {
 			 statusUpdate(values[1]);
-			 Window.alert(values[1]);
+			 if (!isSimulate)
+				 Window.alert(values[1]);
 		 }
 	}
 	
+	/**
+	 * Stage of simulation where client is thinking ie doing nothing
+	 */
 	public void thinkingState() {	
-		int random = randomGenerator.nextInt(5000);
+		if (timer != null) {
+			Window.alert("Timer is already running!");
+	        return;
+	    }
+		
 		timer = new Timer() {
 			public void run() {
 				statusUpdate("Simulation is in thinking state");
-				
+				// Create new user if not created already
 				if (!alreadyLogin) {
 					String user = "Test user";
 					System.out.println("Loginname: " + user);
@@ -575,49 +569,104 @@ public class Collaborator extends Composite implements ClickHandler, ChangeHandl
 				} 
 			}
 		};
-		// Schedule the timer to run once in 5 seconds.
-		timer.schedule(random);
-		timerRunning = true;
+		// Schedule the timer to run in THINKING_TIME seconds.
+		timer.schedule(THINKING_TIME);
+		timer = null;
+		hungryState();
 	}
 	
-	public void hungryState() {	
-		int random = randomGenerator.nextInt(5000);
+	/**
+	 * Stage of simulation where client is hungry ie requesting a document
+	 */
+	public void hungryState() {		
+		if (timer != null) {
+			Window.alert("Timer is already running!");
+	        return;
+	    }
+		
 		timer = new Timer() {
-			public void run() {			
+			public void run() {
+				// Request the first document
 				statusUpdate("Simulation is in hungry state");
-				
-				String key = documentList.getValue(0);
-				requester.request(key);
-				
-				while (!simHasToken) {
-					//System.out.println("Simulator is waiting for token...");
-				}
-				Window.alert("Finally start eating");
-				eatingState();
+				requester.request(documentList.getValue(0));
 			}
 		};
-		// Schedule the timer to run once in 10 seconds.
-		timer.schedule(random);
-		timerRunning = true;
+		// Schedule the timer to run in THINKING_TIME + SERVER_PROCESS_TIME + HUNGRY_TIME seconds.
+		timer.schedule(THINKING_TIME + SERVER_PROCESS_TIME + HUNGRY_TIME);
+		timer = null;
 	}
 	
-	public void eatingState() {
-		int random = randomGenerator.nextInt(5);
-		statusUpdate("Simulation is in eating state");
+	/**
+	 * Stage of simulation where client is locking ie locking a document
+	 */
+	public void lockingState() {
+		if (timer != null) {
+			Window.alert("Timer is already running!");
+	        return;
+	    }
 		
-		contents.setText(userKey + random);
-		lockedDoc.setContents(contents.getHTML());
-		saver.saveDocument(lockedDoc);
-
-		// Schedule the timer to run once in 5 seconds.
-		//timer.scheduleRepeating(5000);
+		timer = new Timer() {
+			public void run() {
+				// Lock document
+				statusUpdate("Stimulation is in locking state");
+				locker.lockDocument(readOnlyDoc.getKey());
+			}
+		};
+		
+		// Schedule the timer to run once in 10 seconds.
+		timer.schedule(SERVER_PROCESS_TIME);
+		timer = null;
+		eatingState();
 	}
 	
-	private void cancelTimer() {
-	    if (timer != null) {
-	       timer.cancel();
-	       timer = null;
-	       timerRunning = false;
+	/**
+	 * Stage of simulation where client is eating ie saving a document
+	 */
+	public void eatingState() {
+		if (timer != null) {
+			Window.alert("Timer is already running!");
+	        return;
+	    }
+		
+		timer = new Timer() {
+			public void run() {
+				// Save document
+				statusUpdate("Stimulation is in eating state.");
+				saver.saveDocument(lockedDoc);
+				simulateCounter++;
+				// Go back to thinking state if we have more iterations left
+				if (simulateCounter < NUM_OF_ITERATION) {
+					thinkingState();
+				} else {
+					isSimulate = false;
+				}
+			}
+		};
+		
+		// Schedule the timer to run once in 10 seconds.
+		timer.schedule(SERVER_PROCESS_TIME + EATING_TIME);
+		timer = null;
+
+	}
+	
+	/**
+	 * Cancel simulation
+	 * 
+	 * @param t : timer to cancel
+	 */
+	private void cancelTimer(Timer t) {
+	    if (t != null) {
+	       t.cancel();
+	       t = null;
 	    }
 	}
+
+	/**
+	 * Let user know that channel is open
+	 */
+	public void channelOpen() {
+		if (!isSimulate)
+			Window.alert("Channel opened!");
+	}
+
 }

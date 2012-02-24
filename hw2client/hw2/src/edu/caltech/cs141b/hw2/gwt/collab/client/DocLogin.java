@@ -30,7 +30,7 @@ public class DocLogin implements AsyncCallback<LoginResults> {
 
 	@Override
 	public void onFailure(Throwable caught) {
-		collaborator.statusUpdate("Error logging in new user"
+		collaborator.statusUpdate("Error login in new user"
 				+ "; caught exception " + caught.getClass()
 				+ " with message: " + caught.getMessage());
 		GWT.log("Error login in new user.", caught);
@@ -44,7 +44,7 @@ public class DocLogin implements AsyncCallback<LoginResults> {
 			    channel.open(new SocketListener() {
 			      @Override
 			      public void onOpen() {
-			        Window.alert("Channel opened!");
+			    	collaborator.channelOpen();	
 			      }
 			      @Override
 			      public void onMessage(String message) {
@@ -63,10 +63,11 @@ public class DocLogin implements AsyncCallback<LoginResults> {
 			  }
 			});
 		
+		
 		collaborator.btnLogin.setEnabled(false);
 		collaborator.loginName.setEnabled(false);
 		collaborator.alreadyLogin = true;
 		collaborator.userKey = results.getUserId();
-		collaborator.statusUpdate("Successfully logged in new user.");
+		collaborator.statusUpdate("Successfully logged in new user. ");
 	}
 }

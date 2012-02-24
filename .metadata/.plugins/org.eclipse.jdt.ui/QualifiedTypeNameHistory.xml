@@ -6,4 +6,8 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="com.google.gwt.dom.client.Style.Unit"/>
 <fullyQualifiedTypeName name="com.google.appengine.api.datastore.Text"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.ui.ToggleButton"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Timer"/>
+<fullyQualifiedTypeName name="com.google.gwt.user.client.Random"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

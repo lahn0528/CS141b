@@ -2,9 +2,9 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="247" key="DIALOG_WIDTH"/>
-		<item value="95" key="DIALOG_Y_ORIGIN"/>
+		<item value="370" key="DIALOG_Y_ORIGIN"/>
 		<item value="358" key="DIALOG_HEIGHT"/>
-		<item value="981" key="DIALOG_X_ORIGIN"/>
+		<item value="8" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Segoe UI|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="createC" key="selection"/>
+		<item value="gotMs" key="selection"/>
 		<list key="findhistory">
-			<item value="createC"/>
-			<item value="login"/>
-			<item value="statusU"/>
-			<item value="status"/>
-			<item value="receiveMs"/>
-			<item value="System.out.println"/>
-			<item value="getLockedBy"/>
-			<item value="welcom"/>
+			<item value="gotMs"/>
+			<item value="receiveM"/>
+			<item value="userKey"/>
+			<item value="contents"/>
+			<item value="remove"/>
+			<item value="error"/>
+			<item value="greylo"/>
+			<item value="greynew"/>
 		</list>
 		<list key="replacehistory">
 			<item value="Document"/>
